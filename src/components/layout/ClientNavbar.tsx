@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -50,7 +49,6 @@ const ClientNavbar = () => {
           </div>
         </div>
 
-        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-3">
           <Link 
             to="/client/dashboard" 
@@ -134,7 +132,6 @@ const ClientNavbar = () => {
           </DropdownMenu>
         </div>
 
-        {/* Mobile Menu Button */}
         <div className="flex items-center space-x-4 md:hidden">
           <button className="relative">
             <Bell size={20} className="text-gray-600" />
@@ -153,7 +150,6 @@ const ClientNavbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-white border-t border-gray-100 animate-fade-in">
           <div className="container-app py-4 flex flex-col space-y-4">

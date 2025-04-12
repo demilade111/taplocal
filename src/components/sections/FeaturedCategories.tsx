@@ -120,7 +120,9 @@ const FeaturedCategories = () => {
         
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredServices.map((service) => (
-            <ServiceCard key={service.id} {...service} />
+            <Link to={`/service/${service.id}`} key={service.id}>
+              <ServiceCard {...service} />
+            </Link>
           ))}
         </div>
         

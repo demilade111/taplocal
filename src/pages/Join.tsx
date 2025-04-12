@@ -8,6 +8,7 @@ import { PhoneLoginForm } from "@/components/auth/PhoneLoginForm";
 import { EmailLoginForm } from "@/components/auth/EmailLoginForm";
 import { UserRoleSelection } from "@/components/auth/UserRoleSelection";
 import { ArrowLeft } from "lucide-react";
+import { toast } from "sonner";
 
 type AuthStep = "login" | "verify" | "role-select";
 
@@ -35,6 +36,17 @@ const Join = () => {
       setAuthStep("login");
     } else if (authStep === "role-select") {
       setAuthStep("verify");
+    }
+  };
+
+  const handleSubmit = () => {
+    if (authStep === "login") {
+      // In a real app we would validate input and submit to backend
+      setAuthStep("verify");
+    } else if (authStep === "verify") {
+      // In a real app we would verify the code
+      toast.success("Verification successful!");
+      handleVerificationSuccess();
     }
   };
 
@@ -74,11 +86,11 @@ const Join = () => {
               </TabsList>
               
               <TabsContent value="phone">
-                <PhoneLoginForm onSubmit={() => setAuthStep("verify")} />
+                <PhoneLoginForm onSubmit={() => handleSubmit()} />
               </TabsContent>
               
               <TabsContent value="email">
-                <EmailLoginForm onSubmit={() => setAuthStep("verify")} />
+                <EmailLoginForm onSubmit={() => handleSubmit()} />
               </TabsContent>
             </Tabs>
           )}
@@ -100,7 +112,7 @@ const Join = () => {
               </div>
               <Button 
                 className="w-full bg-taplocal-purple hover:bg-taplocal-purple/90" 
-                onClick={handleVerificationSuccess}
+                onClick={() => handleSubmit()}
               >
                 Verify
               </Button>

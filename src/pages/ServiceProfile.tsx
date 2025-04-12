@@ -237,7 +237,7 @@ const ServiceProfile = () => {
                 
                 <div className="flex items-center space-x-4 mt-2">
                   <div className="flex items-center">
-                    <Star className="h-5 w-5 text-yellow-400 fill-yellow-400" />
+                    <Star className="h-5 w-5 text-yellow-400 fill-yellow-400 mr-1" />
                     <span className="ml-1 font-medium">{service.rating.toFixed(1)}</span>
                     <span className="ml-1 text-sm opacity-90">({service.reviewCount} reviews)</span>
                   </div>
