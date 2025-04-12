@@ -29,7 +29,7 @@ const MainLayout = () => {
   };
   
   const userType = determineUserType();
-  const isMainPage = location.pathname === "/" || location.pathname === "/join" || location.pathname === "/service";
+  const isMainPage = location.pathname === "/" || location.pathname === "/join" || location.pathname.startsWith("/service");
   
   // Don't show the sidebar on the main landing pages
   if (isMainPage) {
