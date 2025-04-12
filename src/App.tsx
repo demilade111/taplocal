@@ -10,6 +10,9 @@ import Join from "./pages/Join";
 import NotFound from "./pages/NotFound";
 import ProfessionalDashboard from "./pages/professional/Dashboard";
 import ClientDashboard from "./pages/client/Dashboard";
+import ClientBookings from "./pages/client/Bookings";
+import ClientMessages from "./pages/client/Messages";
+import ClientSettings from "./pages/client/Settings";
 import AddServicePage from "./pages/professional/AddService";
 import ServiceProfile from "./pages/ServiceProfile";
 import ServicesPage from "./pages/professional/Services";
@@ -70,9 +73,9 @@ const MainLayout = () => {
             {/* Client Routes */}
             <Route path="/client" element={<ClientDashboard />} />
             <Route path="/client/dashboard" element={<ClientDashboard />} />
-            <Route path="/client/bookings" element={<ClientDashboard />} />
-            <Route path="/client/messages" element={<ClientDashboard />} />
-            <Route path="/client/settings" element={<ClientDashboard />} />
+            <Route path="/client/bookings" element={<ClientBookings />} />
+            <Route path="/client/messages" element={<ClientMessages />} />
+            <Route path="/client/settings" element={<ClientSettings />} />
             
             <Route path="*" element={<NotFound />} />
           </Routes>

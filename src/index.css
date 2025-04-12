@@ -136,4 +136,38 @@
   .sidebar-open {
     @apply translate-x-0;
   }
+
+  /* Client dashboard and mobile navigation customizations */
+  .client-bottom-nav {
+    @apply fixed bottom-0 left-0 w-full bg-white border-t shadow-sm z-50;
+  }
+  
+  .client-nav-link {
+    @apply flex flex-col items-center justify-center p-2 text-xs;
+  }
+  
+  .client-nav-link.active {
+    @apply text-taplocal-purple;
+  }
+  
+  .client-card {
+    @apply bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100;
+  }
+
+  /* Purple theme customizations */
+  .text-taplocal-purple {
+    @apply text-[#9b87f5];
+  }
+  
+  .bg-taplocal-purple {
+    @apply bg-[#9b87f5];
+  }
+  
+  .hover\:bg-taplocal-purple:hover {
+    @apply hover:bg-[#8b77e5];
+  }
+  
+  .border-taplocal-purple {
+    @apply border-[#9b87f5];
+  }
 }

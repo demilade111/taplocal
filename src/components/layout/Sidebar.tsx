@@ -11,8 +11,11 @@ import {
   Settings,
   Wallet,
   X,
-  LogOut
+  LogOut,
+  Bell
 } from "lucide-react";
+import { Avatar } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 
 type SidebarProps = {
   userType: "client" | "professional" | "none";
@@ -83,18 +86,37 @@ const Sidebar = ({ userType }: SidebarProps) => {
     }
   };
 
+  // Create a client top navigation bar component
+  const ClientTopNav = () => {
+    return (
+      <div className="fixed top-0 left-0 w-full bg-white shadow-sm z-20 py-3 px-4">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center space-x-4">
+            {!isOpen && (
+              <button onClick={toggleSidebar} className="mr-2">
+                <Menu size={24} className="text-taplocal-purple" />
+              </button>
+            )}
+            <span className="font-heading text-xl font-bold text-taplocal-purple">TapLocal</span>
+          </div>
+          <div className="flex items-center space-x-6">
+            <div className="relative">
+              <Bell size={20} className="text-gray-600" />
+              <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 bg-taplocal-purple text-white">2</Badge>
+            </div>
+            <Avatar className="h-8 w-8 border-2 border-taplocal-purple">
+              <img src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" alt="Profile" />
+            </Avatar>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
-      {/* Mobile Toggle Button */}
-      {isMobile && (
-        <button
-          onClick={toggleSidebar}
-          className={`fixed top-4 left-4 z-50 bg-white rounded-full p-2 shadow-md md:hidden`}
-          aria-label="Toggle sidebar"
-        >
-          {isOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
-      )}
+      {/* Mobile Top Navigation Bar */}
+      {userType === "client" && isMobile && <ClientTopNav />}
       
       {/* Desktop Toggle Button - Only shown when sidebar is closed */}
       {!isMobile && !isOpen && (
@@ -134,6 +156,16 @@ const Sidebar = ({ userType }: SidebarProps) => {
             <X size={18} />
           </Button>
         </div>
+
+        {userType === "client" && (
+          <div className="flex flex-col items-center p-4 border-b">
+            <Avatar className="h-16 w-16 border-2 border-taplocal-purple mb-2">
+              <img src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" alt="Profile" />
+            </Avatar>
+            <h3 className="font-medium text-gray-800">Alex Johnson</h3>
+            <span className="text-sm text-gray-500">alex@example.com</span>
+          </div>
+        )}
         
         <div className="flex flex-col flex-1 overflow-y-auto p-4">
           <div className="space-y-1">
@@ -143,11 +175,13 @@ const Sidebar = ({ userType }: SidebarProps) => {
                 onClick={() => handleNavigation(link.path)}
                 className={`flex items-center space-x-3 px-3 py-3 rounded-lg transition-colors cursor-pointer ${
                   isLinkActive(link.path)
-                    ? "bg-taplocal-purple/15 text-taplocal-purple"
-                    : "text-gray-700 hover:bg-gray-100"
+                    ? "bg-taplocal-purple text-white"
+                    : "text-gray-700 hover:bg-taplocal-purple/10 hover:text-taplocal-purple"
                 }`}
               >
-                {link.icon}
+                <div className={`${isLinkActive(link.path) ? "text-white" : "text-taplocal-purple"}`}>
+                  {link.icon}
+                </div>
                 <span className="font-medium">{link.name}</span>
               </div>
             ))}
@@ -164,6 +198,31 @@ const Sidebar = ({ userType }: SidebarProps) => {
           </Button>
         </div>
       </aside>
+
+      {/* Client Mobile Bottom Navigation */}
+      {userType === "client" && isMobile && (
+        <div className="fixed bottom-0 left-0 w-full bg-white border-t z-20 p-1">
+          <div className="flex justify-around items-center">
+            {clientLinks.map((link) => (
+              <Button
+                key={link.path}
+                variant="ghost"
+                className={`flex flex-col items-center py-1 px-2 rounded-lg ${
+                  isLinkActive(link.path)
+                    ? "bg-taplocal-purple/10 text-taplocal-purple"
+                    : "text-gray-600"
+                }`}
+                onClick={() => navigate(link.path)}
+              >
+                <div className={isLinkActive(link.path) ? "text-taplocal-purple" : "text-gray-600"}>
+                  {link.icon}
+                </div>
+                <span className="text-xs mt-1">{link.name}</span>
+              </Button>
+            ))}
+          </div>
+        </div>
+      )}
     </>
   );
 };
