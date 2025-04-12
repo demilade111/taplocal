@@ -54,7 +54,7 @@ const MainLayout = () => {
   return (
     <div className="flex min-h-screen bg-gray-50">
       <Sidebar userType={userType} />
-      <div className="flex-1 transition-all duration-300 md:ml-64">
+      <div className="flex-1 md:ml-0 transition-all duration-300">
         <Routes>
           {/* Professional Routes */}
           <Route path="/professional/dashboard" element={<ProfessionalDashboard />} />
