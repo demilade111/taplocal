@@ -69,6 +69,13 @@ const Sidebar = ({ userType }: SidebarProps) => {
   
   const links = userType === "professional" ? professionalLinks : clientLinks;
   
+  const isLinkActive = (path: string) => {
+    // Check if the current location path starts with the link path
+    return location.pathname === path || 
+           // Special case for Overview/Dashboard to handle index routes
+           (path.endsWith('/dashboard') && location.pathname === `/${userType}`);
+  };
+
   const handleNavigation = (path: string) => {
     navigate(path);
     if (isMobile) {
@@ -135,7 +142,7 @@ const Sidebar = ({ userType }: SidebarProps) => {
                 key={link.path}
                 onClick={() => handleNavigation(link.path)}
                 className={`flex items-center space-x-3 px-3 py-3 rounded-lg transition-colors cursor-pointer ${
-                  location.pathname === link.path
+                  isLinkActive(link.path)
                     ? "bg-taplocal-teal/15 text-taplocal-teal"
                     : "text-gray-700 hover:bg-gray-100"
                 }`}
