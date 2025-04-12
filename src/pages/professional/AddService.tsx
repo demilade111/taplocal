@@ -12,6 +12,7 @@ import * as z from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   title: z.string().min(3, {
@@ -30,7 +31,7 @@ const formSchema = z.object({
 
 const AddServicePage = () => {
   const navigate = useNavigate();
-  const { toast } = useToast();
+  const { toast: shadcnToast } = useToast();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -44,16 +45,23 @@ const AddServicePage = () => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     // In a real application, we would submit the form to an API
-    console.log(values);
+    console.log("Form submitted with values:", values);
     
-    // Show success toast
-    toast({
+    // Show success toast using Sonner (more modern toast)
+    toast.success("Service created", {
+      description: "Your service has been created successfully.",
+    });
+    
+    // Also show the shadcn toast to maintain compatibility
+    shadcnToast({
       title: "Service created",
       description: "Your service has been created successfully.",
     });
     
-    // Redirect to dashboard
-    navigate("/professional/dashboard");
+    // Force redirect to dashboard after a short delay to ensure user sees the toast
+    setTimeout(() => {
+      navigate("/professional/dashboard");
+    }, 500);
   }
 
   return (
