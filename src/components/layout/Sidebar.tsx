@@ -58,8 +58,8 @@ const Sidebar = ({ userType }: SidebarProps) => {
   
   const professionalLinks = [
     { name: "Overview", icon: <Home size={20} />, path: "/professional/dashboard" },
-    { name: "Bookings", icon: <Calendar size={20} />, path: "/professional/appointments" },
-    { name: "My Listings", icon: <Plus size={20} />, path: "/professional/services" },
+    { name: "Appointments", icon: <Calendar size={20} />, path: "/professional/appointments" },
+    { name: "My Services", icon: <Plus size={20} />, path: "/professional/services" },
     { name: "Wallet", icon: <Wallet size={20} />, path: "/professional/wallet" },
     { name: "Messages", icon: <MessageSquare size={20} />, path: "/professional/messages" },
     { name: "Settings", icon: <Settings size={20} />, path: "/professional/settings" },
@@ -117,6 +117,7 @@ const Sidebar = ({ userType }: SidebarProps) => {
                     ? "bg-taplocal-teal/15 text-taplocal-teal"
                     : "text-gray-700 hover:bg-gray-100"
                 }`}
+                onClick={isMobile ? () => setIsOpen(false) : undefined}
               >
                 {link.icon}
                 <span className="font-medium">{link.name}</span>

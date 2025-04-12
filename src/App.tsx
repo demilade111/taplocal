@@ -50,9 +50,6 @@ const MainLayout = () => {
       <Sidebar userType={userType} />
       <div className="flex-1 transition-all duration-300 md:ml-64">
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/join" element={<Join />} />
-          
           {/* Professional Routes */}
           <Route path="/professional/dashboard" element={<ProfessionalDashboard />} />
           <Route path="/professional/add-service" element={<AddServicePage />} />
@@ -68,7 +65,6 @@ const MainLayout = () => {
           <Route path="/client/messages" element={<ClientDashboard />} />
           <Route path="/client/settings" element={<ClientDashboard />} />
           
-          <Route path="/service/:id" element={<ServiceProfile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
