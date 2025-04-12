@@ -31,15 +31,28 @@ const MainLayout = () => {
   const userType = determineUserType();
   
   return (
-    <div className="flex">
+    <div className="flex min-h-screen bg-gray-50">
       <Sidebar userType={userType} />
-      <div className="flex-1 transition-all duration-300 ml-0 md:ml-64">
+      <div className="flex-1 transition-all duration-300 md:ml-64">
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/join" element={<Join />} />
+          
+          {/* Professional Routes */}
           <Route path="/professional/dashboard" element={<ProfessionalDashboard />} />
           <Route path="/professional/add-service" element={<AddServicePage />} />
+          <Route path="/professional/services" element={<ProfessionalDashboard />} />
+          <Route path="/professional/appointments" element={<ProfessionalDashboard />} />
+          <Route path="/professional/messages" element={<ProfessionalDashboard />} />
+          <Route path="/professional/wallet" element={<ProfessionalDashboard />} />
+          <Route path="/professional/settings" element={<ProfessionalDashboard />} />
+          
+          {/* Client Routes */}
           <Route path="/client/dashboard" element={<ClientDashboard />} />
+          <Route path="/client/bookings" element={<ClientDashboard />} />
+          <Route path="/client/messages" element={<ClientDashboard />} />
+          <Route path="/client/settings" element={<ClientDashboard />} />
+          
           <Route path="/service/:id" element={<ServiceProfile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

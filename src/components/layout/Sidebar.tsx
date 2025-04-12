@@ -3,18 +3,16 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
-  ChevronLeft,
-  ChevronRight,
-  Home,
-  Search,
   Calendar,
-  MessageCircle,
-  Bell,
-  User,
-  Settings,
+  Home,
+  Laptop,
   LogOut,
   Menu,
-  Heart
+  MessageSquare,
+  Plus,
+  Settings,
+  Wallet,
+  X
 } from "lucide-react";
 
 type SidebarProps = {
@@ -48,19 +46,19 @@ const Sidebar = ({ userType }: SidebarProps) => {
   };
   
   const clientLinks = [
-    { name: "Home", icon: <Home size={20} />, path: "/client/dashboard" },
+    { name: "Overview", icon: <Home size={20} />, path: "/client/dashboard" },
     { name: "Bookings", icon: <Calendar size={20} />, path: "/client/bookings" },
-    { name: "Messages", icon: <MessageCircle size={20} />, path: "/client/messages" },
-    { name: "Favorites", icon: <Heart size={20} />, path: "/client/favorites" },
-    { name: "Profile", icon: <User size={20} />, path: "/client/profile" },
+    { name: "Messages", icon: <MessageSquare size={20} />, path: "/client/messages" },
+    { name: "Settings", icon: <Settings size={20} />, path: "/client/settings" },
   ];
   
   const professionalLinks = [
-    { name: "Dashboard", icon: <Home size={20} />, path: "/professional/dashboard" },
-    { name: "Appointments", icon: <Calendar size={20} />, path: "/professional/appointments" },
-    { name: "Messages", icon: <MessageCircle size={20} />, path: "/professional/messages" },
-    { name: "Services", icon: <Settings size={20} />, path: "/professional/services" },
-    { name: "Profile", icon: <User size={20} />, path: "/professional/profile" },
+    { name: "Overview", icon: <Home size={20} />, path: "/professional/dashboard" },
+    { name: "Bookings", icon: <Calendar size={20} />, path: "/professional/appointments" },
+    { name: "My Listings", icon: <Plus size={20} />, path: "/professional/services" },
+    { name: "Wallet", icon: <Wallet size={20} />, path: "/professional/wallet" },
+    { name: "Messages", icon: <MessageSquare size={20} />, path: "/professional/messages" },
+    { name: "Settings", icon: <Settings size={20} />, path: "/professional/settings" },
   ];
   
   const links = userType === "professional" ? professionalLinks : clientLinks;
@@ -70,10 +68,10 @@ const Sidebar = ({ userType }: SidebarProps) => {
       {/* Toggle Button for Mobile */}
       <button
         onClick={toggleSidebar}
-        className={`sidebar-toggle ${isOpen ? "left-64" : "left-0"} md:hidden`}
+        className={`fixed top-4 left-4 z-50 bg-white rounded-full p-2 shadow-md md:hidden`}
         aria-label="Toggle sidebar"
       >
-        {isOpen ? <ChevronLeft size={20} /> : <Menu size={20} />}
+        {isOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
       
       {/* Sidebar Overlay for Mobile */}
@@ -86,22 +84,21 @@ const Sidebar = ({ userType }: SidebarProps) => {
       
       {/* Sidebar */}
       <aside
-        className={`h-screen fixed top-0 left-0 z-40 flex flex-col bg-white border-r border-gray-200 transition-transform duration-300 ease-in-out w-64 ${
-          isOpen ? "sidebar-open" : "sidebar-closed"
-        }`}
+        className={`h-screen fixed top-0 left-0 z-40 flex flex-col bg-white shadow-lg transition-transform duration-300 ease-in-out w-64 ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        } md:translate-x-0`}
       >
         <div className="flex items-center justify-between p-4 border-b">
           <Link to="/" className="flex items-center space-x-2">
-            <span className="text-xl font-heading font-bold text-taplocal-purple">TapLocal</span>
+            <span className="text-xl font-heading font-bold text-taplocal-teal">TapLocal</span>
           </Link>
           <Button
             variant="ghost"
             size="sm"
             className="md:flex hidden"
             onClick={toggleSidebar}
-            aria-label={isOpen ? "Close sidebar" : "Open sidebar"}
           >
-            {isOpen ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+            {isOpen ? <X size={18} /> : <Menu size={18} />}
           </Button>
         </div>
         
@@ -112,14 +109,14 @@ const Sidebar = ({ userType }: SidebarProps) => {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`flex items-center space-x-3 px-3 py-2 rounded-md transition-colors ${
+                  className={`flex items-center space-x-3 px-3 py-3 rounded-lg transition-colors ${
                     location.pathname === link.path
-                      ? "bg-taplocal-purple/10 text-taplocal-purple"
+                      ? "bg-taplocal-teal/15 text-taplocal-teal"
                       : "text-gray-700 hover:bg-gray-100"
                   }`}
                 >
                   {link.icon}
-                  {isOpen && <span>{link.name}</span>}
+                  <span className="font-medium">{link.name}</span>
                 </Link>
               ))}
             </div>
@@ -130,14 +127,14 @@ const Sidebar = ({ userType }: SidebarProps) => {
           {userType === "none" ? (
             <div className="space-y-2">
               <Button 
-                className="w-full bg-taplocal-purple hover:bg-taplocal-purple/90"
+                className="w-full bg-taplocal-teal hover:bg-taplocal-teal/90 text-white"
                 asChild
               >
                 <Link to="/join">Join TapLocal</Link>
               </Button>
               <Button 
                 variant="outline" 
-                className="w-full"
+                className="w-full border-taplocal-teal text-taplocal-teal hover:bg-taplocal-teal/10"
                 asChild
               >
                 <Link to="/login">Login</Link>
@@ -148,11 +145,14 @@ const Sidebar = ({ userType }: SidebarProps) => {
               variant="ghost" 
               className="w-full justify-start text-red-500 hover:bg-red-50 hover:text-red-600"
             >
-              <LogOut size={18} className="mr-2" /> {isOpen && "Logout"}
+              <LogOut size={18} className="mr-2" /> Logout
             </Button>
           )}
         </div>
       </aside>
+      
+      {/* Main content padding to account for sidebar */}
+      <div className={`md:ml-64 transition-all duration-300 ${isOpen && isMobile ? 'ml-64' : 'ml-0'}`}></div>
     </>
   );
 };
