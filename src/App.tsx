@@ -12,6 +12,11 @@ import ProfessionalDashboard from "./pages/professional/Dashboard";
 import ClientDashboard from "./pages/client/Dashboard";
 import AddServicePage from "./pages/professional/AddService";
 import ServiceProfile from "./pages/ServiceProfile";
+import ServicesPage from "./pages/professional/Services";
+import AppointmentsPage from "./pages/professional/Appointments";
+import WalletPage from "./pages/professional/Wallet";
+import MessagesPage from "./pages/professional/Messages";
+import SettingsPage from "./pages/professional/Settings";
 import Sidebar from "./components/layout/Sidebar";
 
 // Create a new QueryClient instance
@@ -53,11 +58,11 @@ const MainLayout = () => {
           {/* Professional Routes */}
           <Route path="/professional/dashboard" element={<ProfessionalDashboard />} />
           <Route path="/professional/add-service" element={<AddServicePage />} />
-          <Route path="/professional/services" element={<ProfessionalDashboard />} />
-          <Route path="/professional/appointments" element={<ProfessionalDashboard />} />
-          <Route path="/professional/messages" element={<ProfessionalDashboard />} />
-          <Route path="/professional/wallet" element={<ProfessionalDashboard />} />
-          <Route path="/professional/settings" element={<ProfessionalDashboard />} />
+          <Route path="/professional/services" element={<ServicesPage />} />
+          <Route path="/professional/appointments" element={<AppointmentsPage />} />
+          <Route path="/professional/messages" element={<MessagesPage />} />
+          <Route path="/professional/wallet" element={<WalletPage />} />
+          <Route path="/professional/settings" element={<SettingsPage />} />
           
           {/* Client Routes */}
           <Route path="/client/dashboard" element={<ClientDashboard />} />
