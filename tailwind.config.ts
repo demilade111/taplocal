@@ -131,8 +131,8 @@ export default {
                 'scale-in': 'scale-in 0.3s ease-out',
 			},
 			fontFamily: {
-				sans: ['Inter', 'sans-serif'],
-				heading: ['Inter', 'sans-serif'],
+				sans: ['Inter', 'system-ui', 'sans-serif'],
+				heading: ['Poppins', 'Inter', 'sans-serif'],
 			},
             backgroundImage: {
                 'gradient-primary': 'linear-gradient(135deg, #6C63FF 0%, #5851DB 100%)',

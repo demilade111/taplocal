@@ -20,6 +20,7 @@ import AppointmentsPage from "./pages/professional/Appointments";
 import WalletPage from "./pages/professional/Wallet";
 import MessagesPage from "./pages/professional/Messages";
 import SettingsPage from "./pages/professional/Settings";
+import AvailabilityPage from "./pages/professional/Availability";
 import Sidebar from "./components/layout/Sidebar";
 
 // Create a new QueryClient instance
@@ -69,6 +70,7 @@ const MainLayout = () => {
             <Route path="/professional/messages" element={<MessagesPage />} />
             <Route path="/professional/wallet" element={<WalletPage />} />
             <Route path="/professional/settings" element={<SettingsPage />} />
+            <Route path="/professional/availability" element={<AvailabilityPage />} />
             
             {/* Client Routes */}
             <Route path="/client" element={<ClientDashboard />} />
