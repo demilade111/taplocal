@@ -61,9 +61,9 @@ const MessagesPage = () => {
   const selectedMessages = selectedContact ? messageHistory[selectedContact as keyof typeof messageHistory] : [];
   
   return (
-    <div className="container mx-auto py-8 px-4 md:px-0">
-      <h1 className="text-3xl font-bold font-heading text-taplocal-dark mb-2 px-4 md:px-6">Messages</h1>
-      <p className="text-gray-600 mb-6 px-4 md:px-6">Chat with your clients</p>
+    <div className="py-8">
+      <h1 className="text-3xl font-bold font-heading text-taplocal-dark mb-2">Messages</h1>
+      <p className="text-gray-600 mb-6">Chat with your clients</p>
       
       <div className="bg-white rounded-lg shadow-sm border overflow-hidden min-h-[calc(100vh-220px)]">
         <div className="flex flex-col md:flex-row h-[600px]">
@@ -91,7 +91,7 @@ const MessagesPage = () => {
                     <div
                       key={contact.id}
                       className={`flex items-center gap-3 p-4 border-b cursor-pointer hover:bg-gray-50 ${
-                        selectedContact === contact.id ? "bg-gray-50" : ""
+                        selectedContact === contact.id ? "bg-taplocal-purple/5" : ""
                       }`}
                       onClick={() => setSelectedContact(contact.id)}
                     >
@@ -104,7 +104,7 @@ const MessagesPage = () => {
                           />
                         </div>
                         {contact.unread > 0 && (
-                          <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                          <div className="absolute -top-1 -right-1 bg-taplocal-purple text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                             {contact.unread}
                           </div>
                         )}
@@ -114,7 +114,7 @@ const MessagesPage = () => {
                           <h3 className="font-medium truncate">{contact.name}</h3>
                           <span className="text-xs text-gray-500">{contact.lastMessageTime}</span>
                         </div>
-                        <p className={`text-sm truncate ${contact.unread > 0 ? "font-medium" : "text-gray-500"}`}>
+                        <p className={`text-sm truncate ${contact.unread > 0 ? "font-medium text-taplocal-purple" : "text-gray-500"}`}>
                           {contact.lastMessage}
                         </p>
                       </div>
@@ -127,7 +127,7 @@ const MessagesPage = () => {
                     <div
                       key={contact.id}
                       className={`flex items-center gap-3 p-4 border-b cursor-pointer hover:bg-gray-50 ${
-                        selectedContact === contact.id ? "bg-gray-50" : ""
+                        selectedContact === contact.id ? "bg-taplocal-purple/5" : ""
                       }`}
                       onClick={() => setSelectedContact(contact.id)}
                     >
@@ -139,7 +139,7 @@ const MessagesPage = () => {
                             className="w-full h-full object-cover"
                           />
                         </div>
-                        <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                        <div className="absolute -top-1 -right-1 bg-taplocal-purple text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                           {contact.unread}
                         </div>
                       </div>
@@ -148,7 +148,7 @@ const MessagesPage = () => {
                           <h3 className="font-medium truncate">{contact.name}</h3>
                           <span className="text-xs text-gray-500">{contact.lastMessageTime}</span>
                         </div>
-                        <p className="text-sm truncate font-medium">
+                        <p className="text-sm truncate font-medium text-taplocal-purple">
                           {contact.lastMessage}
                         </p>
                       </div>
@@ -194,7 +194,7 @@ const MessagesPage = () => {
                       >
                         <div className={`max-w-[80%] px-4 py-2 rounded-lg ${
                           message.sender === "me" 
-                            ? "bg-taplocal-teal text-white rounded-br-none" 
+                            ? "bg-taplocal-purple text-white rounded-br-none" 
                             : "bg-gray-100 text-gray-800 rounded-bl-none"
                         }`}>
                           <p>{message.text}</p>
@@ -216,7 +216,7 @@ const MessagesPage = () => {
                       placeholder="Type a message..."
                       className="flex-1"
                     />
-                    <Button size="icon" className="bg-taplocal-teal hover:bg-taplocal-teal/90">
+                    <Button size="icon" className="bg-taplocal-purple hover:bg-taplocal-purple/90">
                       <Send className="h-4 w-4" />
                     </Button>
                   </div>
@@ -225,7 +225,7 @@ const MessagesPage = () => {
             ) : (
               <div className="flex items-center justify-center h-full">
                 <div className="text-center">
-                  <h3 className="text-lg font-medium mb-1">Select a conversation</h3>
+                  <h3 className="text-lg font-medium mb-1 text-taplocal-purple">Select a conversation</h3>
                   <p className="text-gray-500">Choose a contact to start chatting</p>
                 </div>
               </div>

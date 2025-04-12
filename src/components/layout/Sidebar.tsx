@@ -103,7 +103,7 @@ const Sidebar = ({ userType }: SidebarProps) => {
           className="fixed top-4 left-4 z-50 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors duration-200"
           aria-label="Open sidebar"
         >
-          <Menu size={20} className="text-taplocal-teal" />
+          <Menu size={20} className="text-taplocal-purple" />
         </button>
       )}
       
@@ -123,7 +123,7 @@ const Sidebar = ({ userType }: SidebarProps) => {
       >
         <div className="flex items-center justify-between p-4 border-b">
           <Link to="/" className="flex items-center space-x-2">
-            <span className="text-xl font-heading font-bold text-taplocal-teal">TapLocal</span>
+            <span className="text-xl font-heading font-bold text-taplocal-purple">TapLocal</span>
           </Link>
           <Button
             variant="ghost"
@@ -143,7 +143,7 @@ const Sidebar = ({ userType }: SidebarProps) => {
                 onClick={() => handleNavigation(link.path)}
                 className={`flex items-center space-x-3 px-3 py-3 rounded-lg transition-colors cursor-pointer ${
                   isLinkActive(link.path)
-                    ? "bg-taplocal-teal/15 text-taplocal-teal"
+                    ? "bg-taplocal-purple/15 text-taplocal-purple"
                     : "text-gray-700 hover:bg-gray-100"
                 }`}
               >

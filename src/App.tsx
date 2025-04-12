@@ -54,25 +54,29 @@ const MainLayout = () => {
   return (
     <div className="flex min-h-screen bg-gray-50">
       <Sidebar userType={userType} />
-      <div className="flex-1 transition-all duration-300">
-        <Routes>
-          {/* Professional Routes */}
-          <Route path="/professional/dashboard" element={<ProfessionalDashboard />} />
-          <Route path="/professional/add-service" element={<AddServicePage />} />
-          <Route path="/professional/services" element={<ServicesPage />} />
-          <Route path="/professional/appointments" element={<AppointmentsPage />} />
-          <Route path="/professional/messages" element={<MessagesPage />} />
-          <Route path="/professional/wallet" element={<WalletPage />} />
-          <Route path="/professional/settings" element={<SettingsPage />} />
-          
-          {/* Client Routes */}
-          <Route path="/client/dashboard" element={<ClientDashboard />} />
-          <Route path="/client/bookings" element={<ClientDashboard />} />
-          <Route path="/client/messages" element={<ClientDashboard />} />
-          <Route path="/client/settings" element={<ClientDashboard />} />
-          
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+      <div className="flex-1 transition-all duration-300 pl-0 md:pl-0 pt-16 md:pt-6">
+        <div className="container-app py-4">
+          <Routes>
+            {/* Professional Routes */}
+            <Route path="/professional" element={<ProfessionalDashboard />} />
+            <Route path="/professional/dashboard" element={<ProfessionalDashboard />} />
+            <Route path="/professional/add-service" element={<AddServicePage />} />
+            <Route path="/professional/services" element={<ServicesPage />} />
+            <Route path="/professional/appointments" element={<AppointmentsPage />} />
+            <Route path="/professional/messages" element={<MessagesPage />} />
+            <Route path="/professional/wallet" element={<WalletPage />} />
+            <Route path="/professional/settings" element={<SettingsPage />} />
+            
+            {/* Client Routes */}
+            <Route path="/client" element={<ClientDashboard />} />
+            <Route path="/client/dashboard" element={<ClientDashboard />} />
+            <Route path="/client/bookings" element={<ClientDashboard />} />
+            <Route path="/client/messages" element={<ClientDashboard />} />
+            <Route path="/client/settings" element={<ClientDashboard />} />
+            
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
       </div>
     </div>
   );
