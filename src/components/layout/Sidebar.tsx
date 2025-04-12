@@ -78,14 +78,27 @@ const Sidebar = ({ userType }: SidebarProps) => {
 
   return (
     <>
-      {/* Toggle Button for Mobile */}
-      <button
-        onClick={toggleSidebar}
-        className={`fixed top-4 left-4 z-50 bg-white rounded-full p-2 shadow-md md:hidden`}
-        aria-label="Toggle sidebar"
-      >
-        {isOpen ? <X size={20} /> : <Menu size={20} />}
-      </button>
+      {/* Mobile Toggle Button */}
+      {isMobile && (
+        <button
+          onClick={toggleSidebar}
+          className={`fixed top-4 left-4 z-50 bg-white rounded-full p-2 shadow-md md:hidden`}
+          aria-label="Toggle sidebar"
+        >
+          {isOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      )}
+      
+      {/* Desktop Toggle Button - Only shown when sidebar is closed */}
+      {!isMobile && !isOpen && (
+        <button
+          onClick={toggleSidebar}
+          className="fixed top-4 left-4 z-50 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors duration-200"
+          aria-label="Open sidebar"
+        >
+          <Menu size={20} className="text-taplocal-teal" />
+        </button>
+      )}
       
       {/* Sidebar Overlay for Mobile */}
       {isMobile && isOpen && (
@@ -111,7 +124,7 @@ const Sidebar = ({ userType }: SidebarProps) => {
             className="flex"
             onClick={toggleSidebar}
           >
-            {isOpen ? <X size={18} /> : <Menu size={18} />}
+            <X size={18} />
           </Button>
         </div>
         
