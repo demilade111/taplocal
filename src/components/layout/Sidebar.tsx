@@ -97,21 +97,23 @@ const Sidebar = ({ userType }: SidebarProps) => {
       {/* Sidebar */}
       <aside
         className={`h-screen fixed top-0 left-0 z-40 flex flex-col bg-white shadow-lg transition-transform duration-300 ease-in-out w-64 ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
+          isOpen || !isMobile ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0`}
       >
         <div className="flex items-center justify-between p-4 border-b">
           <Link to="/" className="flex items-center space-x-2">
             <span className="text-xl font-heading font-bold text-taplocal-teal">TapLocal</span>
           </Link>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="md:flex hidden"
-            onClick={toggleSidebar}
-          >
-            {isOpen ? <X size={18} /> : <Menu size={18} />}
-          </Button>
+          {!isMobile && (
+            <Button
+              variant="ghost"
+              size="sm"
+              className="flex"
+              onClick={toggleSidebar}
+            >
+              {isOpen ? <X size={18} /> : <Menu size={18} />}
+            </Button>
+          )}
         </div>
         
         <div className="flex flex-col flex-1 overflow-y-auto p-4">
