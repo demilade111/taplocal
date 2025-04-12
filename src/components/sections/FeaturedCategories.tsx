@@ -1,0 +1,118 @@
+
+import { useState } from "react";
+import CategorySelector from "@/components/CategorySelector";
+import ServiceCard from "@/components/ServiceCard";
+
+// Mock data
+const categories = [
+  { id: "all", name: "All", icon: "https://api.iconify.design/lucide:grid.svg?color=%236c63ff" },
+  { id: "hair", name: "Hair", icon: "https://api.iconify.design/lucide:scissors.svg?color=%236c63ff" },
+  { id: "plumbing", name: "Plumbing", icon: "https://api.iconify.design/lucide:wrench.svg?color=%236c63ff" },
+  { id: "tutoring", name: "Tutoring", icon: "https://api.iconify.design/lucide:book-open.svg?color=%236c63ff" },
+  { id: "cleaning", name: "Cleaning", icon: "https://api.iconify.design/lucide:sparkles.svg?color=%236c63ff" },
+  { id: "electrical", name: "Electrical", icon: "https://api.iconify.design/lucide:lightbulb.svg?color=%236c63ff" },
+  { id: "gardening", name: "Gardening", icon: "https://api.iconify.design/lucide:flower.svg?color=%236c63ff" },
+  { id: "painting", name: "Painting", icon: "https://api.iconify.design/lucide:paintbrush.svg?color=%236c63ff" },
+  { id: "fitness", name: "Fitness", icon: "https://api.iconify.design/lucide:dumbbell.svg?color=%236c63ff" },
+  { id: "cooking", name: "Cooking", icon: "https://api.iconify.design/lucide:chef-hat.svg?color=%236c63ff" },
+];
+
+// Mock service data
+const services = [
+  {
+    id: "1",
+    name: "Sarah Johnson",
+    profession: "Hair Stylist",
+    description: "Specializing in modern cuts and color. Over 8 years of experience making clients look and feel their best.",
+    price: "$45",
+    rating: 4.8,
+    reviewCount: 124,
+    imageUrl: "https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80",
+    voiceUrl: "https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3",
+    category: "hair"
+  },
+  {
+    id: "2",
+    name: "Michael Rodriguez",
+    profession: "Plumber",
+    description: "Licensed plumber with 12+ years experience. Emergency repairs, installations, and maintenance services.",
+    price: "$65/hr",
+    rating: 4.9,
+    reviewCount: 89,
+    imageUrl: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
+    voiceUrl: "https://assets.mixkit.co/music/preview/mixkit-hip-hop-02-621.mp3",
+    category: "plumbing"
+  },
+  {
+    id: "3",
+    name: "Lisa Wong",
+    profession: "Math Tutor",
+    description: "PhD in Mathematics with 10+ years teaching experience. Specializing in high school and college level math.",
+    price: "$40/hr",
+    rating: 5.0,
+    reviewCount: 56,
+    imageUrl: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
+    voiceUrl: "https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3",
+    category: "tutoring"
+  },
+  {
+    id: "4",
+    name: "David Chen",
+    profession: "House Cleaner",
+    description: "Thorough and efficient cleaning services. Eco-friendly products available upon request.",
+    price: "$25/hr",
+    rating: 4.7,
+    reviewCount: 102,
+    imageUrl: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
+    voiceUrl: "https://assets.mixkit.co/music/preview/mixkit-hip-hop-02-621.mp3",
+    category: "cleaning"
+  },
+];
+
+const FeaturedCategories = () => {
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  const filteredServices = selectedCategory === "all"
+    ? services
+    : services.filter(service => service.category === selectedCategory);
+
+  return (
+    <div className="py-16 bg-white">
+      <div className="container-app">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold font-heading text-taplocal-dark mb-4">
+            Popular Services
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Browse our most requested categories or search for specific services
+          </p>
+        </div>
+
+        <CategorySelector 
+          categories={categories} 
+          onSelect={setSelectedCategory}
+          selectedCategory={selectedCategory}
+        />
+        
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredServices.map((service) => (
+            <ServiceCard key={service.id} {...service} />
+          ))}
+        </div>
+        
+        <div className="mt-12 text-center">
+          <Button 
+            variant="outline"
+            size="lg" 
+            className="rounded-full px-8 border-taplocal-purple text-taplocal-purple hover:bg-taplocal-purple hover:text-white"
+            asChild
+          >
+            <Link to="/services">View All Services</Link>
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default FeaturedCategories;
