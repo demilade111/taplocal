@@ -21,15 +21,29 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-6">
-          <Link to="/services" className="text-taplocal-dark dark:text-gray-200 hover:text-taplocal-purple transition-colors">
-            Browse Services
-          </Link>
-          <Link to="/how-it-works" className="text-taplocal-dark dark:text-gray-200 hover:text-taplocal-purple transition-colors">
-            How It Works
-          </Link>
-          <Link to="/about" className="text-taplocal-dark dark:text-gray-200 hover:text-taplocal-purple transition-colors">
-            About Us
-          </Link>
+          <div className="flex space-x-6">
+            <div className="group relative">
+              <Link to="/services" className="text-taplocal-dark dark:text-gray-200 hover:text-taplocal-purple transition-colors pb-2">
+                Browse Services
+              </Link>
+              <div className="absolute inset-x-0 bottom-0 h-0.5 bg-taplocal-purple transform scale-x-0 origin-left transition-transform group-hover:scale-x-100"></div>
+            </div>
+
+            <div className="group relative">
+              <Link to="/how-it-works" className="text-taplocal-dark dark:text-gray-200 hover:text-taplocal-purple transition-colors pb-2">
+                How It Works
+              </Link>
+              <div className="absolute inset-x-0 bottom-0 h-0.5 bg-taplocal-purple transform scale-x-0 origin-left transition-transform group-hover:scale-x-100"></div>
+            </div>
+
+            <div className="group relative">
+              <Link to="/about" className="text-taplocal-dark dark:text-gray-200 hover:text-taplocal-purple transition-colors pb-2">
+                About Us
+              </Link>
+              <div className="absolute inset-x-0 bottom-0 h-0.5 bg-taplocal-purple transform scale-x-0 origin-left transition-transform group-hover:scale-x-100"></div>
+            </div>
+          </div>
+
           <Button variant="outline" asChild className="dark:text-gray-200 dark:border-gray-700">
             <Link to="/join">Login</Link>
           </Button>
