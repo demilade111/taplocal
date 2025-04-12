@@ -9,12 +9,15 @@ import { EmailLoginForm } from "@/components/auth/EmailLoginForm";
 import { UserRoleSelection } from "@/components/auth/UserRoleSelection";
 import { ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 type AuthStep = "login" | "verify" | "role-select";
 
 const Join = () => {
   const [authStep, setAuthStep] = useState<AuthStep>("login");
   const [authMethod, setAuthMethod] = useState<"phone" | "email">("phone");
+  const [verificationCode, setVerificationCode] = useState("");
   const navigate = useNavigate();
 
   const handleVerificationSuccess = () => {
@@ -50,13 +53,21 @@ const Join = () => {
       toast.info("Verification code sent!");
     } else if (authStep === "verify") {
       // In a real app we would verify the code
-      toast.success("Verification successful!");
-      handleVerificationSuccess();
+      if (verificationCode.length === 6) {
+        toast.success("Verification successful!");
+        handleVerificationSuccess();
+      } else {
+        toast.error("Please enter all 6 digits of the verification code");
+      }
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-taplocal-purple/5 to-white py-16 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-taplocal-purple/5 to-white dark:from-taplocal-purple/10 dark:to-background py-16 px-4">
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+      
       <Card className="w-full max-w-md shadow-lg border-0 card-glass animate-scale-in">
         <CardHeader className="text-center relative">
           {authStep !== "login" && (
@@ -102,18 +113,25 @@ const Join = () => {
           
           {authStep === "verify" && (
             <div className="space-y-4">
-              <p className="text-center text-sm text-gray-500">
+              <p className="text-center text-sm text-gray-500 dark:text-gray-300">
                 Enter the 6-digit code we sent to your {authMethod === "phone" ? "phone" : "email"}
               </p>
               <div className="flex justify-center py-4">
-                <input 
-                  type="text" 
-                  inputMode="numeric" 
+                <InputOTP 
                   maxLength={6} 
-                  pattern="[0-9]*"
-                  className="text-center text-2xl tracking-widest w-48 p-3 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-taplocal-purple focus:border-transparent"
-                  placeholder="------"
-                />
+                  value={verificationCode} 
+                  onChange={(value) => setVerificationCode(value)}
+                  className="gap-2"
+                >
+                  <InputOTPGroup>
+                    <InputOTPSlot index={0} className="h-12 w-12 text-xl" />
+                    <InputOTPSlot index={1} className="h-12 w-12 text-xl" />
+                    <InputOTPSlot index={2} className="h-12 w-12 text-xl" />
+                    <InputOTPSlot index={3} className="h-12 w-12 text-xl" />
+                    <InputOTPSlot index={4} className="h-12 w-12 text-xl" />
+                    <InputOTPSlot index={5} className="h-12 w-12 text-xl" />
+                  </InputOTPGroup>
+                </InputOTP>
               </div>
               <Button 
                 className="w-full bg-gradient-primary hover:opacity-90" 
@@ -121,7 +139,7 @@ const Join = () => {
               >
                 Verify
               </Button>
-              <p className="text-center text-sm text-gray-500 pt-2">
+              <p className="text-center text-sm text-gray-500 dark:text-gray-300 pt-2">
                 Didn't receive a code? <button className="text-taplocal-purple hover:underline">Resend</button>
               </p>
             </div>
@@ -134,7 +152,7 @@ const Join = () => {
         
         {authStep === "login" && (
           <CardFooter className="flex flex-col space-y-4">
-            <div className="text-sm text-center text-gray-500">
+            <div className="text-sm text-center text-gray-500 dark:text-gray-300">
               By continuing, you agree to TapLocal's{" "}
               <a href="/terms" className="text-taplocal-purple hover:underline">Terms of Service</a> and{" "}
               <a href="/privacy" className="text-taplocal-purple hover:underline">Privacy Policy</a>

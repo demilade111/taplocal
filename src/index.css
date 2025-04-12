@@ -181,6 +181,22 @@
   .dark .hero-subtitle {
     @apply text-gray-200;
   }
+  
+  .dark .text-taplocal-dark {
+    @apply text-gray-100;
+  }
+  
+  .dark .bg-white {
+    @apply bg-gray-900;
+  }
+  
+  .dark .text-gray-600 {
+    @apply text-gray-300;
+  }
+  
+  .dark .text-gray-500 {
+    @apply text-gray-400;
+  }
 }
 
 @layer utilities {
