@@ -43,12 +43,12 @@ const Hero = () => {
     <div className="relative bg-gradient-hero pt-12 pb-20 md:pt-20 md:pb-28">
       <div className="container-app">
         <div className="text-center max-w-3xl mx-auto">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-taplocal-dark mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-taplocal-dark dark:text-white hero-title mb-6">
             Find and book trusted local professionals — 
             <span className="text-taplocal-purple"> by voice or video</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-200 hero-subtitle mb-8 max-w-2xl mx-auto">
             Discover skilled local service providers and book with confidence.
             Hear their voice or watch their intro — feel the trust.
           </p>
@@ -84,9 +84,9 @@ const Hero = () => {
                       </TabsTrigger>
                     </TabsList>
                     <TabsContent value="audio" className="flex flex-col items-center">
-                      <div className="w-full max-w-lg bg-gradient-to-r from-taplocal-pastelBlue to-taplocal-pastelPink p-6 rounded-xl shadow-md">
+                      <div className="w-full max-w-lg bg-gradient-to-r from-taplocal-pastelBlue to-taplocal-pastelPink dark:from-taplocal-purple/20 dark:to-taplocal-purple/40 p-6 rounded-xl shadow-md">
                         <h3 className="text-xl font-semibold mb-4">Welcome to TapLocal Audio Experience</h3>
-                        <p className="mb-6 text-gray-600">Listen to our introduction and learn how professional voices create trust</p>
+                        <p className="mb-6 text-gray-600 dark:text-gray-200">Listen to our introduction and learn how professional voices create trust</p>
                         <div className="flex justify-center items-center">
                           <audio id="intro-audio" src={introMedia.audio} className="hidden" />
                           <Button 
@@ -103,9 +103,9 @@ const Hero = () => {
                       </div>
                     </TabsContent>
                     <TabsContent value="video">
-                      <div className="w-full max-w-2xl mx-auto bg-gradient-to-r from-taplocal-pastelBlue to-taplocal-pastelPink p-6 rounded-xl shadow-md">
+                      <div className="w-full max-w-2xl mx-auto bg-gradient-to-r from-taplocal-pastelBlue to-taplocal-pastelPink dark:from-taplocal-purple/20 dark:to-taplocal-purple/40 p-6 rounded-xl shadow-md">
                         <h3 className="text-xl font-semibold mb-4">TapLocal Video Introduction</h3>
-                        <p className="mb-6 text-gray-600">Watch how professionals showcase their services</p>
+                        <p className="mb-6 text-gray-600 dark:text-gray-200">Watch how professionals showcase their services</p>
                         <div className="rounded-lg overflow-hidden">
                           <video 
                             controls 
