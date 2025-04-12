@@ -11,6 +11,7 @@ import NotFound from "./pages/NotFound";
 import ProfessionalDashboard from "./pages/professional/Dashboard";
 import ClientDashboard from "./pages/client/Dashboard";
 import AddServicePage from "./pages/professional/AddService";
+import ServiceProfile from "./pages/ServiceProfile";
 
 // Create a new QueryClient instance
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => {
               <Route path="/professional/dashboard" element={<ProfessionalDashboard />} />
               <Route path="/professional/add-service" element={<AddServicePage />} />
               <Route path="/client/dashboard" element={<ClientDashboard />} />
+              <Route path="/service/:id" element={<ServiceProfile />} />
               {/* Additional routes will be added as we develop more pages */}
               <Route path="*" element={<NotFound />} />
             </Routes>

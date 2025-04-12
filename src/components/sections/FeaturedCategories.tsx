@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import CategorySelector from "@/components/CategorySelector";
 import ServiceCard from "@/components/ServiceCard";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
 // Mock data
 const categories = [
@@ -79,22 +80,43 @@ const FeaturedCategories = () => {
     : services.filter(service => service.category === selectedCategory);
 
   return (
-    <div className="py-16 bg-white">
+    <div className="py-16 bg-gradient-to-b from-white to-taplocal-light">
       <div className="container-app">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold font-heading text-taplocal-dark mb-4">
-            Popular Services
+          <h2 className="text-3xl md:text-4xl font-bold font-heading text-taplocal-dark mb-4">
+            Popular <span className="text-taplocal-purple">Services</span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Browse our most requested categories or search for specific services
           </p>
         </div>
 
-        <CategorySelector 
-          categories={categories} 
-          onSelect={setSelectedCategory}
-          selectedCategory={selectedCategory}
-        />
+        {/* Featured Categories Carousel */}
+        <div className="mb-12">
+          <h3 className="text-xl font-semibold text-taplocal-dark mb-6 pl-2">Popular Categories</h3>
+          <div className="relative px-4">
+            <Carousel className="w-full">
+              <CarouselContent>
+                {categories.slice(1).map((category) => (
+                  <CarouselItem key={category.id} className="md:basis-1/4 lg:basis-1/6 pl-2">
+                    <button 
+                      onClick={() => setSelectedCategory(category.id)}
+                      className={`w-full flex flex-col items-center justify-center p-4 rounded-xl transition-all duration-200 h-32
+                        ${selectedCategory === category.id 
+                          ? "bg-taplocal-purple bg-opacity-10 border-2 border-taplocal-purple" 
+                          : "bg-white border-2 border-gray-100 hover:border-taplocal-purple/50"}`}
+                    >
+                      <div className="w-12 h-12 flex items-center justify-center mb-3 rounded-full bg-taplocal-light">
+                        <img src={category.icon} alt={category.name} className="w-6 h-6" />
+                      </div>
+                      <span className="text-sm font-medium">{category.name}</span>
+                    </button>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+          </div>
+        </div>
         
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredServices.map((service) => (
