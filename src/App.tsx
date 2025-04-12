@@ -29,7 +29,22 @@ const MainLayout = () => {
   };
   
   const userType = determineUserType();
+  const isMainPage = location.pathname === "/" || location.pathname === "/join" || location.pathname === "/service";
   
+  // Don't show the sidebar on the main landing pages
+  if (isMainPage) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/join" element={<Join />} />
+          <Route path="/service/:id" element={<ServiceProfile />} />
+        </Routes>
+      </div>
+    );
+  }
+  
+  // Show sidebar for logged in user routes
   return (
     <div className="flex min-h-screen bg-gray-50">
       <Sidebar userType={userType} />

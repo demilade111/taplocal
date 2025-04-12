@@ -5,14 +5,13 @@ import { Button } from "@/components/ui/button";
 import {
   Calendar,
   Home,
-  Laptop,
-  LogOut,
-  Menu,
   MessageSquare,
+  Menu,
   Plus,
   Settings,
   Wallet,
-  X
+  X,
+  LogOut
 } from "lucide-react";
 
 type SidebarProps = {
@@ -44,6 +43,11 @@ const Sidebar = ({ userType }: SidebarProps) => {
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+  
+  // If we're on the main page, don't show the sidebar
+  if (userType === "none") {
+    return null;
+  }
   
   const clientLinks = [
     { name: "Overview", icon: <Home size={20} />, path: "/client/dashboard" },
@@ -102,57 +106,34 @@ const Sidebar = ({ userType }: SidebarProps) => {
           </Button>
         </div>
         
-        {userType !== "none" && (
-          <div className="flex flex-col flex-1 overflow-y-auto p-4">
-            <div className="space-y-1">
-              {links.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`flex items-center space-x-3 px-3 py-3 rounded-lg transition-colors ${
-                    location.pathname === link.path
-                      ? "bg-taplocal-teal/15 text-taplocal-teal"
-                      : "text-gray-700 hover:bg-gray-100"
-                  }`}
-                >
-                  {link.icon}
-                  <span className="font-medium">{link.name}</span>
-                </Link>
-              ))}
-            </div>
+        <div className="flex flex-col flex-1 overflow-y-auto p-4">
+          <div className="space-y-1">
+            {links.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`flex items-center space-x-3 px-3 py-3 rounded-lg transition-colors ${
+                  location.pathname === link.path
+                    ? "bg-taplocal-teal/15 text-taplocal-teal"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+              >
+                {link.icon}
+                <span className="font-medium">{link.name}</span>
+              </Link>
+            ))}
           </div>
-        )}
+        </div>
         
         <div className="p-4 border-t">
-          {userType === "none" ? (
-            <div className="space-y-2">
-              <Button 
-                className="w-full bg-taplocal-teal hover:bg-taplocal-teal/90 text-white"
-                asChild
-              >
-                <Link to="/join">Join TapLocal</Link>
-              </Button>
-              <Button 
-                variant="outline" 
-                className="w-full border-taplocal-teal text-taplocal-teal hover:bg-taplocal-teal/10"
-                asChild
-              >
-                <Link to="/login">Login</Link>
-              </Button>
-            </div>
-          ) : (
-            <Button 
-              variant="ghost" 
-              className="w-full justify-start text-red-500 hover:bg-red-50 hover:text-red-600"
-            >
-              <LogOut size={18} className="mr-2" /> Logout
-            </Button>
-          )}
+          <Button 
+            variant="ghost" 
+            className="w-full justify-start text-red-500 hover:bg-red-50 hover:text-red-600"
+          >
+            <LogOut size={18} className="mr-2" /> Logout
+          </Button>
         </div>
       </aside>
-      
-      {/* Main content padding to account for sidebar */}
-      <div className={`md:ml-64 transition-all duration-300 ${isOpen && isMobile ? 'ml-64' : 'ml-0'}`}></div>
     </>
   );
 };

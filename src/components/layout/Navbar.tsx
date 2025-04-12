@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,7 +30,7 @@ const Navbar = () => {
             About Us
           </Link>
           <Button variant="outline" asChild>
-            <Link to="/login">Login</Link>
+            <Link to="/join">Login</Link>
           </Button>
           <Button asChild>
             <Link to="/join">Join TapLocal</Link>
@@ -74,7 +74,7 @@ const Navbar = () => {
             </Link>
             <div className="flex flex-col space-y-3 pt-2">
               <Button variant="outline" asChild>
-                <Link to="/login" onClick={toggleMenu}>
+                <Link to="/join" onClick={toggleMenu}>
                   Login
                 </Link>
               </Button>
