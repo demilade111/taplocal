@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import CategorySelector from "@/components/CategorySelector";
 import ServiceCard from "@/components/ServiceCard";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
@@ -32,6 +31,7 @@ const services = [
     reviewCount: 124,
     imageUrl: "https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80",
     voiceUrl: "https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3",
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-hairdresser-working-on-a-woman-hair-51487-large.mp4",
     category: "hair"
   },
   {
@@ -56,6 +56,7 @@ const services = [
     reviewCount: 56,
     imageUrl: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
     voiceUrl: "https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3",
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-young-teacher-working-with-children-in-a-classroom-43299-large.mp4",
     category: "tutoring"
   },
   {
@@ -80,10 +81,10 @@ const FeaturedCategories = () => {
     : services.filter(service => service.category === selectedCategory);
 
   return (
-    <div className="py-16 bg-gradient-to-b from-white to-taplocal-light">
+    <div className="py-16 bg-gradient-cool">
       <div className="container-app">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold font-heading text-taplocal-dark mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4">
             Popular <span className="text-taplocal-purple">Services</span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
@@ -94,22 +95,27 @@ const FeaturedCategories = () => {
         {/* Featured Categories Carousel */}
         <div className="mb-12">
           <h3 className="text-xl font-semibold text-taplocal-dark mb-6 pl-2">Popular Categories</h3>
-          <div className="relative px-4">
+          <div className="relative">
             <Carousel className="w-full">
               <CarouselContent>
-                {categories.slice(1).map((category) => (
+                {categories.slice(0, 8).map((category) => (
                   <CarouselItem key={category.id} className="md:basis-1/4 lg:basis-1/6 pl-2">
                     <button 
                       onClick={() => setSelectedCategory(category.id)}
                       className={`w-full flex flex-col items-center justify-center p-4 rounded-xl transition-all duration-200 h-32
                         ${selectedCategory === category.id 
-                          ? "bg-taplocal-purple bg-opacity-10 border-2 border-taplocal-purple" 
-                          : "bg-white border-2 border-gray-100 hover:border-taplocal-purple/50"}`}
+                          ? "bg-gradient-to-br from-taplocal-purple/20 to-taplocal-indigo/20 border-2 border-taplocal-purple shadow-md" 
+                          : "bg-white/80 backdrop-blur-sm border-2 border-gray-100 hover:border-taplocal-purple/50"}`}
                     >
-                      <div className="w-12 h-12 flex items-center justify-center mb-3 rounded-full bg-taplocal-light">
+                      <div className={`w-12 h-12 flex items-center justify-center mb-3 rounded-full 
+                        ${selectedCategory === category.id 
+                          ? "bg-taplocal-purple bg-opacity-10" 
+                          : "bg-taplocal-light"}`}>
                         <img src={category.icon} alt={category.name} className="w-6 h-6" />
                       </div>
-                      <span className="text-sm font-medium">{category.name}</span>
+                      <span className={`text-sm font-medium ${selectedCategory === category.id ? "text-taplocal-purple" : ""}`}>
+                        {category.name}
+                      </span>
                     </button>
                   </CarouselItem>
                 ))}
@@ -130,7 +136,7 @@ const FeaturedCategories = () => {
           <Button 
             variant="outline"
             size="lg" 
-            className="rounded-full px-8 border-taplocal-purple text-taplocal-purple hover:bg-taplocal-purple hover:text-white"
+            className="rounded-full px-8 border-taplocal-purple text-taplocal-purple hover:bg-taplocal-purple hover:text-white shadow-sm"
             asChild
           >
             <Link to="/services">View All Services</Link>

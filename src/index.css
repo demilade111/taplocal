@@ -116,4 +116,24 @@
   .container-app {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
+  
+  .card-glass {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-md;
+  }
+  
+  .gradient-bg {
+    @apply bg-gradient-to-br from-taplocal-purple/5 to-white;
+  }
+  
+  .sidebar-toggle {
+    @apply fixed left-0 top-1/2 -translate-y-1/2 bg-white rounded-r-lg p-2 shadow-md z-40 transition-all duration-300;
+  }
+  
+  .sidebar-closed {
+    @apply -translate-x-full;
+  }
+  
+  .sidebar-open {
+    @apply translate-x-0;
+  }
 }

@@ -23,12 +23,16 @@ const Join = () => {
 
   const handleRoleSelection = (role: "client" | "professional") => {
     // In a real app, we would store the user role in the database
-    // For now, we'll just navigate to the appropriate dashboard
-    if (role === "professional") {
-      navigate("/professional/dashboard");
-    } else {
-      navigate("/client/dashboard");
-    }
+    toast.success(`Signed up successfully as a ${role}!`);
+    
+    // Navigate to the appropriate dashboard
+    setTimeout(() => {
+      if (role === "professional") {
+        navigate("/professional/dashboard");
+      } else {
+        navigate("/client/dashboard");
+      }
+    }, 1000);
   };
 
   const handleBackClick = () => {
@@ -43,6 +47,7 @@ const Join = () => {
     if (authStep === "login") {
       // In a real app we would validate input and submit to backend
       setAuthStep("verify");
+      toast.info("Verification code sent!");
     } else if (authStep === "verify") {
       // In a real app we would verify the code
       toast.success("Verification successful!");
@@ -51,8 +56,8 @@ const Join = () => {
   };
 
   return (
-    <div className="container-app max-w-md mx-auto py-16">
-      <Card className="w-full shadow-md">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-taplocal-purple/5 to-white py-16 px-4">
+      <Card className="w-full max-w-md shadow-lg border-0 card-glass animate-scale-in">
         <CardHeader className="text-center relative">
           {authStep !== "login" && (
             <Button 
@@ -65,7 +70,7 @@ const Join = () => {
               <ArrowLeft className="h-4 w-4" />
             </Button>
           )}
-          <h1 className="text-2xl font-bold font-heading text-taplocal-dark">
+          <h1 className="text-2xl font-bold font-heading bg-gradient-primary bg-clip-text text-transparent">
             {authStep === "login" && "Join TapLocal"}
             {authStep === "verify" && "Verify Your Identity"}
             {authStep === "role-select" && "I am a..."}
@@ -111,7 +116,7 @@ const Join = () => {
                 />
               </div>
               <Button 
-                className="w-full bg-taplocal-purple hover:bg-taplocal-purple/90" 
+                className="w-full bg-gradient-primary hover:opacity-90" 
                 onClick={() => handleSubmit()}
               >
                 Verify
