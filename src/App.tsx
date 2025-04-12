@@ -10,6 +10,7 @@ import Join from "./pages/Join";
 import NotFound from "./pages/NotFound";
 import ProfessionalDashboard from "./pages/professional/Dashboard";
 import ClientDashboard from "./pages/client/Dashboard";
+import AddServicePage from "./pages/professional/AddService";
 
 // Create a new QueryClient instance
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => {
               <Route path="/" element={<Index />} />
               <Route path="/join" element={<Join />} />
               <Route path="/professional/dashboard" element={<ProfessionalDashboard />} />
+              <Route path="/professional/add-service" element={<AddServicePage />} />
               <Route path="/client/dashboard" element={<ClientDashboard />} />
               {/* Additional routes will be added as we develop more pages */}
               <Route path="*" element={<NotFound />} />
