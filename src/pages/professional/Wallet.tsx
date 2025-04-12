@@ -93,7 +93,7 @@ const escrowTransactions = [
     providerImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80",
     clientName: "Michael Smith",
     clientImage: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80",
-    status: "disputed",
+    status: "disputed" as "disputed", // Fixed TypeScript error here
     createdAt: "Apr 2, 2025",
     expiresAt: "Apr 9, 2025",
   },
