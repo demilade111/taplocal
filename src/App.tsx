@@ -18,26 +18,23 @@ const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <TooltipProvider>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/join" element={<Join />} />
-              <Route path="/professional/dashboard" element={<ProfessionalDashboard />} />
-              <Route path="/professional/add-service" element={<AddServicePage />} />
-              <Route path="/client/dashboard" element={<ClientDashboard />} />
-              <Route path="/service/:id" element={<ServiceProfile />} />
-              {/* Additional routes will be added as we develop more pages */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <Toaster />
-            <Sonner />
-          </TooltipProvider>
-        </BrowserRouter>
-      </QueryClientProvider>
-    </React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <TooltipProvider>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/join" element={<Join />} />
+            <Route path="/professional/dashboard" element={<ProfessionalDashboard />} />
+            <Route path="/professional/add-service" element={<AddServicePage />} />
+            <Route path="/client/dashboard" element={<ClientDashboard />} />
+            <Route path="/service/:id" element={<ServiceProfile />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Toaster />
+          <Sonner />
+        </TooltipProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 };
 
