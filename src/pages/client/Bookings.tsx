@@ -1,12 +1,13 @@
 
 import React, { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, Clock, MapPin } from "lucide-react";
+import { Calendar, Clock, MapPin, Search, Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
 import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
 
 // Mock booking data
 const upcomingBookings = [
@@ -59,6 +60,7 @@ const pastBookings = [
 
 const ClientBookings = () => {
   const [activeTab, setActiveTab] = useState("upcoming");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const cancelBooking = (bookingId: string, serviceName: string) => {
     toast.info(`Cancellation request sent for "${serviceName}"`, {
@@ -93,11 +95,38 @@ const ClientBookings = () => {
     }
   };
 
+  // Filter bookings based on search query
+  const filteredUpcoming = upcomingBookings.filter(booking => 
+    booking.serviceName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    booking.providerName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  
+  const filteredPast = pastBookings.filter(booking => 
+    booking.serviceName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    booking.providerName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className="container-app max-w-4xl pb-20">
+    <div className="container-app max-w-4xl pb-20 animate-fade-in">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold font-heading text-gray-900">My Bookings</h1>
+        <h1 className="text-2xl font-bold text-gray-900">My Bookings</h1>
         <p className="text-gray-600">Manage your upcoming and past appointments</p>
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-4 mb-6 items-center">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4" />
+          <Input 
+            placeholder="Search bookings..." 
+            className="pl-9"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+        <Button variant="outline" className="flex items-center gap-1">
+          <Filter size={16} />
+          Filter
+        </Button>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
@@ -107,8 +136,8 @@ const ClientBookings = () => {
         </TabsList>
         
         <TabsContent value="upcoming" className="mt-6 space-y-6">
-          {upcomingBookings.length > 0 ? (
-            upcomingBookings.map(booking => (
+          {filteredUpcoming.length > 0 ? (
+            filteredUpcoming.map(booking => (
               <Card key={booking.id} className="overflow-hidden hover:shadow-md transition-shadow">
                 <CardContent className="p-0">
                   <div className="flex flex-col md:flex-row">
@@ -177,8 +206,8 @@ const ClientBookings = () => {
         </TabsContent>
         
         <TabsContent value="past" className="mt-6 space-y-6">
-          {pastBookings.length > 0 ? (
-            pastBookings.map(booking => (
+          {filteredPast.length > 0 ? (
+            filteredPast.map(booking => (
               <Card key={booking.id} className="overflow-hidden hover:shadow-md transition-shadow">
                 <CardContent className="p-0">
                   <div className="flex flex-col md:flex-row">

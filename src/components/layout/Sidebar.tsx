@@ -12,7 +12,9 @@ import {
   Wallet,
   X,
   LogOut,
-  Bell
+  Bell,
+  ChevronRight,
+  User
 } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -55,19 +57,19 @@ const Sidebar = ({ userType }: SidebarProps) => {
   }
   
   const clientLinks = [
-    { name: "Overview", icon: <Home size={20} />, path: "/client/dashboard" },
-    { name: "Bookings", icon: <Calendar size={20} />, path: "/client/bookings" },
-    { name: "Messages", icon: <MessageSquare size={20} />, path: "/client/messages" },
-    { name: "Settings", icon: <Settings size={20} />, path: "/client/settings" },
+    { name: "Overview", icon: <Home size={19} />, path: "/client/dashboard" },
+    { name: "Bookings", icon: <Calendar size={19} />, path: "/client/bookings" },
+    { name: "Messages", icon: <MessageSquare size={19} />, path: "/client/messages" },
+    { name: "Settings", icon: <Settings size={19} />, path: "/client/settings" },
   ];
   
   const professionalLinks = [
-    { name: "Overview", icon: <Home size={20} />, path: "/professional/dashboard" },
-    { name: "Appointments", icon: <Calendar size={20} />, path: "/professional/appointments" },
-    { name: "My Services", icon: <Plus size={20} />, path: "/professional/services" },
-    { name: "Wallet", icon: <Wallet size={20} />, path: "/professional/wallet" },
-    { name: "Messages", icon: <MessageSquare size={20} />, path: "/professional/messages" },
-    { name: "Settings", icon: <Settings size={20} />, path: "/professional/settings" },
+    { name: "Overview", icon: <Home size={19} />, path: "/professional/dashboard" },
+    { name: "Appointments", icon: <Calendar size={19} />, path: "/professional/appointments" },
+    { name: "My Services", icon: <Plus size={19} />, path: "/professional/services" },
+    { name: "Wallet", icon: <Wallet size={19} />, path: "/professional/wallet" },
+    { name: "Messages", icon: <MessageSquare size={19} />, path: "/professional/messages" },
+    { name: "Settings", icon: <Settings size={19} />, path: "/professional/settings" },
   ];
   
   const links = userType === "professional" ? professionalLinks : clientLinks;
@@ -86,27 +88,61 @@ const Sidebar = ({ userType }: SidebarProps) => {
     }
   };
 
-  // Create a client top navigation bar component
-  const ClientTopNav = () => {
+  // Create a client/professional top navigation bar component
+  const TopNav = () => {
     return (
-      <div className="fixed top-0 left-0 w-full bg-white shadow-sm z-20 py-3 px-4">
+      <div className="fixed top-0 left-0 w-full bg-white shadow-sm z-20 py-2 px-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-4">
             {!isOpen && (
-              <button onClick={toggleSidebar} className="mr-2">
-                <Menu size={24} className="text-taplocal-purple" />
+              <button onClick={toggleSidebar} className="mr-2 p-1 hover:bg-gray-100 rounded-md">
+                <Menu size={22} className="text-taplocal-purple" />
               </button>
             )}
-            <span className="font-heading text-xl font-bold text-taplocal-purple">TapLocal</span>
+            <span className="font-heading text-xl font-semibold text-taplocal-purple">TapLocal</span>
           </div>
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-4">
             <div className="relative">
-              <Bell size={20} className="text-gray-600" />
+              <Bell size={20} className="text-gray-600 hover:text-taplocal-purple cursor-pointer" />
               <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 bg-taplocal-purple text-white">2</Badge>
             </div>
-            <Avatar className="h-8 w-8 border-2 border-taplocal-purple">
-              <img src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" alt="Profile" />
-            </Avatar>
+            <div className="relative group">
+              <Avatar className="h-8 w-8 border-2 border-taplocal-purple cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" alt="Profile" />
+              </Avatar>
+              <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md overflow-hidden border z-50 hidden group-hover:block">
+                <div className="p-3 border-b">
+                  <p className="font-medium">Alex Johnson</p>
+                  <p className="text-xs text-gray-500">alex@example.com</p>
+                </div>
+                <div className="p-2">
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    className="w-full justify-start text-sm font-normal mb-1"
+                    onClick={() => navigate(`/${userType}/settings`)}
+                  >
+                    <User size={16} className="mr-2" /> Profile
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    className="w-full justify-start text-sm font-normal mb-1"
+                    onClick={() => navigate(`/${userType}/settings`)}
+                  >
+                    <Settings size={16} className="mr-2" /> Settings
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    className="w-full justify-start text-red-500 hover:bg-red-50 hover:text-red-600 text-sm font-normal"
+                    onClick={() => navigate("/")}
+                  >
+                    <LogOut size={16} className="mr-2" /> Logout
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -115,8 +151,8 @@ const Sidebar = ({ userType }: SidebarProps) => {
 
   return (
     <>
-      {/* Mobile Top Navigation Bar */}
-      {userType === "client" && isMobile && <ClientTopNav />}
+      {/* Top Navigation Bar for both user types */}
+      {isMobile && <TopNav />}
       
       {/* Desktop Toggle Button - Only shown when sidebar is closed */}
       {!isMobile && !isOpen && (
@@ -139,13 +175,13 @@ const Sidebar = ({ userType }: SidebarProps) => {
       
       {/* Sidebar */}
       <aside
-        className={`h-screen fixed top-0 left-0 z-40 flex flex-col bg-white shadow-lg transition-transform duration-300 ease-in-out w-64 ${
+        className={`h-screen fixed top-0 left-0 z-40 flex flex-col bg-white shadow-lg transition-transform duration-300 ease-in-out w-56 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="flex items-center justify-between p-4 border-b">
           <Link to="/" className="flex items-center space-x-2">
-            <span className="text-xl font-heading font-bold text-taplocal-purple">TapLocal</span>
+            <span className="text-xl font-heading font-semibold text-taplocal-purple">TapLocal</span>
           </Link>
           <Button
             variant="ghost"
@@ -153,27 +189,27 @@ const Sidebar = ({ userType }: SidebarProps) => {
             className="flex"
             onClick={toggleSidebar}
           >
-            <X size={18} />
+            <ChevronRight size={18} />
           </Button>
         </div>
 
         {userType === "client" && (
           <div className="flex flex-col items-center p-4 border-b">
-            <Avatar className="h-16 w-16 border-2 border-taplocal-purple mb-2">
+            <Avatar className="h-14 w-14 border-2 border-taplocal-purple mb-2">
               <img src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" alt="Profile" />
             </Avatar>
             <h3 className="font-medium text-gray-800">Alex Johnson</h3>
-            <span className="text-sm text-gray-500">alex@example.com</span>
+            <span className="text-xs text-gray-500">alex@example.com</span>
           </div>
         )}
         
-        <div className="flex flex-col flex-1 overflow-y-auto p-4">
+        <div className="flex flex-col flex-1 overflow-y-auto p-3">
           <div className="space-y-1">
             {links.map((link) => (
               <div
                 key={link.path}
                 onClick={() => handleNavigation(link.path)}
-                className={`flex items-center space-x-3 px-3 py-3 rounded-lg transition-colors cursor-pointer ${
+                className={`flex items-center space-x-3 px-3 py-2.5 rounded-lg transition-colors cursor-pointer ${
                   isLinkActive(link.path)
                     ? "bg-taplocal-purple text-white"
                     : "text-gray-700 hover:bg-taplocal-purple/10 hover:text-taplocal-purple"
@@ -182,7 +218,7 @@ const Sidebar = ({ userType }: SidebarProps) => {
                 <div className={`${isLinkActive(link.path) ? "text-white" : "text-taplocal-purple"}`}>
                   {link.icon}
                 </div>
-                <span className="font-medium">{link.name}</span>
+                <span className="font-medium text-sm">{link.name}</span>
               </div>
             ))}
           </div>
@@ -194,7 +230,7 @@ const Sidebar = ({ userType }: SidebarProps) => {
             className="w-full justify-start text-red-500 hover:bg-red-50 hover:text-red-600"
             onClick={() => navigate("/")}
           >
-            <LogOut size={18} className="mr-2" /> Logout
+            <LogOut size={16} className="mr-2" /> Logout
           </Button>
         </div>
       </aside>

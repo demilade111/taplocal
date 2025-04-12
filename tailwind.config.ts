@@ -132,7 +132,7 @@ export default {
 			},
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
-				heading: ['Manrope', 'sans-serif'],
+				heading: ['Inter', 'sans-serif'],
 			},
             backgroundImage: {
                 'gradient-primary': 'linear-gradient(135deg, #6C63FF 0%, #5851DB 100%)',

@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Search, Send, Paperclip, MoreVertical } from "lucide-react";
+import { Search, Send, Paperclip, MoreVertical, Phone, Video } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 // Mock conversation data
 const conversations = [
@@ -92,6 +93,7 @@ const ClientMessages = () => {
   const [selectedConversation, setSelectedConversation] = useState(conversations[0]);
   const [newMessage, setNewMessage] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeTab, setActiveTab] = useState("all");
 
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
@@ -109,9 +111,9 @@ const ClientMessages = () => {
   );
 
   return (
-    <div className="container-app max-w-6xl pb-20">
+    <div className="container-app max-w-6xl pb-20 animate-fade-in">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold font-heading text-gray-900">Messages</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Messages</h1>
         <p className="text-gray-600">Chat with your service providers</p>
       </div>
 
@@ -131,36 +133,52 @@ const ClientMessages = () => {
               </div>
             </div>
             
-            <div className="overflow-y-auto h-[calc(100%-56px)]">
+            <div className="border-b">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+                <TabsList className="grid grid-cols-3 w-full">
+                  <TabsTrigger value="all" className="text-xs">All</TabsTrigger>
+                  <TabsTrigger value="unread" className="text-xs">Unread</TabsTrigger>
+                  <TabsTrigger value="online" className="text-xs">Online</TabsTrigger>
+                </TabsList>
+              </Tabs>
+            </div>
+            
+            <div className="overflow-y-auto h-[calc(100%-100px)]">
               {filteredConversations.length > 0 ? (
-                filteredConversations.map(convo => (
-                  <div 
-                    key={convo.id}
-                    className={`flex items-center p-4 border-b cursor-pointer hover:bg-gray-50 transition-colors ${
-                      selectedConversation.id === convo.id ? 'bg-taplocal-purple/5' : ''
-                    }`}
-                    onClick={() => setSelectedConversation(convo)}
-                  >
-                    <div className="relative">
-                      <Avatar className="h-12 w-12">
-                        <img src={convo.avatar} alt={convo.name} />
-                      </Avatar>
-                      {convo.online && (
-                        <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-500 border-2 border-white"></span>
+                filteredConversations
+                  .filter(convo => {
+                    if (activeTab === "unread") return convo.unread > 0;
+                    if (activeTab === "online") return convo.online;
+                    return true;
+                  })
+                  .map(convo => (
+                    <div 
+                      key={convo.id}
+                      className={`flex items-center p-4 border-b cursor-pointer hover:bg-gray-50 transition-colors ${
+                        selectedConversation.id === convo.id ? 'bg-taplocal-purple/5' : ''
+                      }`}
+                      onClick={() => setSelectedConversation(convo)}
+                    >
+                      <div className="relative">
+                        <Avatar className="h-12 w-12">
+                          <img src={convo.avatar} alt={convo.name} />
+                        </Avatar>
+                        {convo.online && (
+                          <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-500 border-2 border-white"></span>
+                        )}
+                      </div>
+                      <div className="ml-3 flex-1 min-w-0">
+                        <div className="flex justify-between items-center">
+                          <h3 className="font-medium text-gray-900 truncate">{convo.name}</h3>
+                          <span className="text-xs text-gray-500">{convo.time}</span>
+                        </div>
+                        <p className="text-sm text-gray-600 truncate">{convo.lastMessage}</p>
+                      </div>
+                      {convo.unread > 0 && (
+                        <Badge className="ml-2 bg-taplocal-purple">{convo.unread}</Badge>
                       )}
                     </div>
-                    <div className="ml-3 flex-1 min-w-0">
-                      <div className="flex justify-between items-center">
-                        <h3 className="font-medium text-gray-900 truncate">{convo.name}</h3>
-                        <span className="text-xs text-gray-500">{convo.time}</span>
-                      </div>
-                      <p className="text-sm text-gray-600 truncate">{convo.lastMessage}</p>
-                    </div>
-                    {convo.unread > 0 && (
-                      <Badge className="ml-2 bg-taplocal-purple">{convo.unread}</Badge>
-                    )}
-                  </div>
-                ))
+                  ))
               ) : (
                 <div className="p-4 text-center text-gray-500">
                   No conversations found
@@ -185,9 +203,17 @@ const ClientMessages = () => {
                       </p>
                     </div>
                   </div>
-                  <Button variant="ghost" size="icon">
-                    <MoreVertical className="h-5 w-5" />
-                  </Button>
+                  <div className="flex space-x-2">
+                    <Button variant="ghost" size="icon" className="text-taplocal-purple">
+                      <Phone className="h-5 w-5" />
+                    </Button>
+                    <Button variant="ghost" size="icon" className="text-taplocal-purple">
+                      <Video className="h-5 w-5" />
+                    </Button>
+                    <Button variant="ghost" size="icon">
+                      <MoreVertical className="h-5 w-5" />
+                    </Button>
+                  </div>
                 </div>
                 
                 <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
@@ -196,6 +222,11 @@ const ClientMessages = () => {
                       key={message.id}
                       className={`flex ${message.senderId === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
+                      {message.senderId !== 'user' && (
+                        <Avatar className="h-8 w-8 mr-2 mt-1">
+                          <img src={selectedConversation.avatar} alt={selectedConversation.name} />
+                        </Avatar>
+                      )}
                       <div 
                         className={`max-w-[80%] rounded-lg p-3 ${
                           message.senderId === 'user' 
