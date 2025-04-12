@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Calendar,
@@ -22,6 +22,7 @@ const Sidebar = ({ userType }: SidebarProps) => {
   const [isOpen, setIsOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   
   useEffect(() => {
     const handleResize = () => {
@@ -66,6 +67,13 @@ const Sidebar = ({ userType }: SidebarProps) => {
   ];
   
   const links = userType === "professional" ? professionalLinks : clientLinks;
+  
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    if (isMobile) {
+      setIsOpen(false);
+    }
+  };
 
   return (
     <>
@@ -109,19 +117,18 @@ const Sidebar = ({ userType }: SidebarProps) => {
         <div className="flex flex-col flex-1 overflow-y-auto p-4">
           <div className="space-y-1">
             {links.map((link) => (
-              <Link
+              <div
                 key={link.path}
-                to={link.path}
-                className={`flex items-center space-x-3 px-3 py-3 rounded-lg transition-colors ${
+                onClick={() => handleNavigation(link.path)}
+                className={`flex items-center space-x-3 px-3 py-3 rounded-lg transition-colors cursor-pointer ${
                   location.pathname === link.path
                     ? "bg-taplocal-teal/15 text-taplocal-teal"
                     : "text-gray-700 hover:bg-gray-100"
                 }`}
-                onClick={isMobile ? () => setIsOpen(false) : undefined}
               >
                 {link.icon}
                 <span className="font-medium">{link.name}</span>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
@@ -130,6 +137,7 @@ const Sidebar = ({ userType }: SidebarProps) => {
           <Button 
             variant="ghost" 
             className="w-full justify-start text-red-500 hover:bg-red-50 hover:text-red-600"
+            onClick={() => navigate("/")}
           >
             <LogOut size={18} className="mr-2" /> Logout
           </Button>
