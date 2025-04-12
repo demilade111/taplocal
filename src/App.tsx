@@ -44,6 +44,7 @@ const MainLayout = () => {
           <Route path="/" element={<Index />} />
           <Route path="/join" element={<Join />} />
           <Route path="/service/:id" element={<ServiceProfile />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     );
