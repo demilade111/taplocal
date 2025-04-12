@@ -120,15 +120,15 @@
   }
   
   .card-glass {
-    @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-md;
+    @apply bg-card/80 backdrop-blur-sm border border-border shadow-md;
   }
   
   .gradient-bg {
-    @apply bg-gradient-to-br from-taplocal-purple/5 to-white;
+    @apply bg-gradient-to-br from-taplocal-purple/5 to-background;
   }
   
   .sidebar-toggle {
-    @apply fixed left-0 top-1/2 -translate-y-1/2 bg-white rounded-r-lg p-2 shadow-md z-40 transition-all duration-300;
+    @apply fixed left-0 top-1/2 -translate-y-1/2 bg-card rounded-r-lg p-2 shadow-md z-40 transition-all duration-300;
   }
   
   .sidebar-closed {
@@ -141,7 +141,7 @@
 
   /* Client dashboard and mobile navigation customizations */
   .client-bottom-nav {
-    @apply fixed bottom-0 left-0 w-full bg-white border-t shadow-sm z-50;
+    @apply fixed bottom-0 left-0 w-full bg-card border-t border-border shadow-sm z-50;
   }
   
   .client-nav-link {
@@ -153,7 +153,7 @@
   }
   
   .client-card {
-    @apply bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100;
+    @apply bg-card rounded-lg shadow-sm hover:shadow-md transition-shadow border border-border;
   }
 
   /* Purple theme customizations */
@@ -171,5 +171,74 @@
   
   .border-taplocal-purple {
     @apply border-[#9b87f5];
+  }
+}
+
+/* Animation utilities */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.4s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out;
+  }
+
+  .animate-bounce-in {
+    animation: bounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
   }
 }

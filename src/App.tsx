@@ -1,10 +1,11 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { ThemeProvider } from "@/hooks/use-theme";
 import Index from "./pages/Index";
 import Join from "./pages/Join";
 import NotFound from "./pages/NotFound";
@@ -29,6 +30,21 @@ const queryClient = new QueryClient();
 const MainLayout = () => {
   const location = useLocation();
   
+  // Add page transition animation effect
+  useEffect(() => {
+    // Animate the page content on route change
+    const mainContent = document.querySelector('main');
+    if (mainContent) {
+      mainContent.classList.add('animate-fade-in');
+      
+      const timer = setTimeout(() => {
+        mainContent.classList.remove('animate-fade-in');
+      }, 500);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [location.pathname]);
+  
   // Determine if the user is logged in and what type they are
   const determineUserType = (): "client" | "professional" | "none" => {
     const path = location.pathname;
@@ -43,7 +59,7 @@ const MainLayout = () => {
   // Don't show the sidebar on the main landing pages
   if (isMainPage) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-background">
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/join" element={<Join />} />
@@ -56,10 +72,10 @@ const MainLayout = () => {
   
   // Show sidebar for logged in user routes
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-background">
       <Sidebar userType={userType} />
       <div className="flex-1 transition-all duration-300 pl-0 md:pl-0 pt-16 md:pt-6">
-        <div className="container-app py-4">
+        <main className="container-app py-4">
           <Routes>
             {/* Professional Routes */}
             <Route path="/professional" element={<ProfessionalDashboard />} />
@@ -81,7 +97,7 @@ const MainLayout = () => {
             
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </div>
+        </main>
       </div>
     </div>
   );
@@ -89,15 +105,17 @@ const MainLayout = () => {
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <TooltipProvider>
-          <MainLayout />
-          <Toaster />
-          <Sonner />
-        </TooltipProvider>
-      </BrowserRouter>
-    </QueryClientProvider>
+    <ThemeProvider defaultTheme="system">
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <TooltipProvider>
+            <MainLayout />
+            <Toaster />
+            <Sonner />
+          </TooltipProvider>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 };
 
