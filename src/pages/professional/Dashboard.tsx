@@ -64,47 +64,119 @@ const ProfessionalDashboard = () => {
 
         {/* Main Content */}
         <div className="md:col-span-3">
-          <TabsContent value="overview" className="mt-0">
-            <Card>
-              <CardHeader>
-                <CardTitle>Welcome to your dashboard!</CardTitle>
-                <CardDescription>
-                  Complete your profile to start receiving bookings
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
-                    <div className="flex">
-                      <div className="ml-3">
-                        <p className="text-sm text-yellow-700">
-                          Your profile is 1 step away from being complete
+          <Tabs value={activeTab} onValueChange={setActiveTab}>
+            <TabsContent value="overview" className="mt-0">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Welcome to your dashboard!</CardTitle>
+                  <CardDescription>
+                    Complete your profile to start receiving bookings
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                      <div className="flex">
+                        <div className="ml-3">
+                          <p className="text-sm text-yellow-700">
+                            Your profile is 1 step away from being complete
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <div className="bg-gray-100 p-4 rounded-lg">
+                        <h3 className="font-semibold mb-2">Record your voice introduction</h3>
+                        <p className="text-sm text-gray-600 mb-2">
+                          Tell clients about yourself and your services in a 30-second voice clip
                         </p>
+                        <Button variant="outline">Record Voice Intro</Button>
+                      </div>
+                      
+                      <div className="bg-gray-100 p-4 rounded-lg">
+                        <h3 className="font-semibold mb-2">Set your availability</h3>
+                        <p className="text-sm text-gray-600 mb-2">
+                          Let clients know when you're available to provide your services
+                        </p>
+                        <Button variant="outline">Set Availability</Button>
                       </div>
                     </div>
                   </div>
-                  
-                  <div className="space-y-4">
-                    <div className="bg-gray-100 p-4 rounded-lg">
-                      <h3 className="font-semibold mb-2">Record your voice introduction</h3>
-                      <p className="text-sm text-gray-600 mb-2">
-                        Tell clients about yourself and your services in a 30-second voice clip
-                      </p>
-                      <Button variant="outline">Record Voice Intro</Button>
-                    </div>
-                    
-                    <div className="bg-gray-100 p-4 rounded-lg">
-                      <h3 className="font-semibold mb-2">Set your availability</h3>
-                      <p className="text-sm text-gray-600 mb-2">
-                        Let clients know when you're available to provide your services
-                      </p>
-                      <Button variant="outline">Set Availability</Button>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            
+            <TabsContent value="bookings">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Bookings</CardTitle>
+                  <CardDescription>View and manage your upcoming and past bookings</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-center py-8 text-gray-500">
+                    You don't have any bookings yet.
+                  </p>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            
+            <TabsContent value="listings">
+              <Card>
+                <CardHeader>
+                  <CardTitle>My Listings</CardTitle>
+                  <CardDescription>Manage your service listings</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-center py-8 text-gray-500">
+                    You haven't created any service listings yet.
+                  </p>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            
+            <TabsContent value="wallet">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Wallet</CardTitle>
+                  <CardDescription>Manage your earnings and transactions</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-center py-8 text-gray-500">
+                    You don't have any transactions yet.
+                  </p>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            
+            <TabsContent value="messages">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Messages</CardTitle>
+                  <CardDescription>Chat with your clients</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-center py-8 text-gray-500">
+                    You don't have any messages yet.
+                  </p>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            
+            <TabsContent value="settings">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Settings</CardTitle>
+                  <CardDescription>Manage your account settings</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-center py-8 text-gray-500">
+                    Settings will be available soon.
+                  </p>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </div>
