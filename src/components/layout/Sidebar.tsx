@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -14,8 +15,6 @@ import {
   Bell,
   ChevronRight,
   User,
-  Sun,
-  Moon
 } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -87,11 +86,11 @@ const Sidebar = ({ userType }: SidebarProps) => {
 
   const TopNav = () => {
     return (
-      <div className="fixed top-0 left-0 w-full bg-background border-b border-border z-20 py-2 px-4">
+      <div className="fixed top-0 left-0 w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 z-20 py-2 px-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-4">
             {!isOpen && (
-              <button onClick={toggleSidebar} className="mr-2 p-1 hover:bg-muted rounded-md">
+              <button onClick={toggleSidebar} className="mr-2 p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
                 <Menu size={22} className="text-taplocal-purple" />
               </button>
             )}
@@ -100,23 +99,23 @@ const Sidebar = ({ userType }: SidebarProps) => {
           <div className="flex items-center space-x-4">
             <ThemeToggle />
             <div className="relative">
-              <Bell size={20} className="text-foreground hover:text-taplocal-purple cursor-pointer" />
+              <Bell size={20} className="text-gray-700 dark:text-gray-300 hover:text-taplocal-purple cursor-pointer" />
               <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 bg-taplocal-purple text-white">2</Badge>
             </div>
             <div className="relative group">
               <Avatar className="h-8 w-8 border-2 border-taplocal-purple cursor-pointer">
                 <img src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" alt="Profile" />
               </Avatar>
-              <div className="absolute right-0 mt-2 w-48 bg-card shadow-lg rounded-md overflow-hidden border z-50 hidden group-hover:block">
-                <div className="p-3 border-b border-border">
-                  <p className="font-medium">Alex Johnson</p>
-                  <p className="text-xs text-muted-foreground">alex@example.com</p>
+              <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 shadow-lg rounded-md overflow-hidden border dark:border-gray-700 z-50 hidden group-hover:block">
+                <div className="p-3 border-b border-gray-100 dark:border-gray-700">
+                  <p className="font-medium dark:text-white">Alex Johnson</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">alex@example.com</p>
                 </div>
                 <div className="p-2">
                   <Button 
                     variant="ghost" 
                     size="sm"
-                    className="w-full justify-start text-sm font-normal mb-1"
+                    className="w-full justify-start text-sm font-normal mb-1 dark:hover:bg-gray-700 dark:text-gray-200"
                     onClick={() => navigate(`/${userType}/settings`)}
                   >
                     <User size={16} className="mr-2" /> Profile
@@ -124,7 +123,7 @@ const Sidebar = ({ userType }: SidebarProps) => {
                   <Button 
                     variant="ghost" 
                     size="sm"
-                    className="w-full justify-start text-sm font-normal mb-1"
+                    className="w-full justify-start text-sm font-normal mb-1 dark:hover:bg-gray-700 dark:text-gray-200"
                     onClick={() => navigate(`/${userType}/settings`)}
                   >
                     <Settings size={16} className="mr-2" /> Settings
@@ -132,7 +131,7 @@ const Sidebar = ({ userType }: SidebarProps) => {
                   <Button 
                     variant="ghost" 
                     size="sm"
-                    className="w-full justify-start text-red-500 hover:bg-red-50 hover:text-red-600 text-sm font-normal"
+                    className="w-full justify-start text-red-500 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/30 text-sm font-normal"
                     onClick={() => navigate("/")}
                   >
                     <LogOut size={16} className="mr-2" /> Logout
@@ -153,7 +152,7 @@ const Sidebar = ({ userType }: SidebarProps) => {
       {!isMobile && !isOpen && (
         <button
           onClick={toggleSidebar}
-          className="fixed top-4 left-4 z-50 bg-card rounded-full p-2 shadow-md hover:bg-muted transition-colors duration-200"
+          className="fixed top-4 left-4 z-50 bg-white dark:bg-gray-800 rounded-full p-2 shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
           aria-label="Open sidebar"
         >
           <Menu size={20} className="text-taplocal-purple" />
@@ -168,18 +167,18 @@ const Sidebar = ({ userType }: SidebarProps) => {
       )}
       
       <aside
-        className={`h-screen fixed top-0 left-0 z-40 flex flex-col bg-card shadow-lg transition-transform duration-300 ease-in-out w-48 ${
+        className={`h-screen fixed top-0 left-0 z-40 flex flex-col bg-white dark:bg-gray-900 shadow-lg transition-transform duration-300 ease-in-out w-48 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } animate-slide-in`}
       >
-        <div className="flex items-center justify-between p-4 border-b border-border">
+        <div className="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-800">
           <Link to="/" className="flex items-center space-x-2">
             <span className="text-xl font-heading font-semibold text-taplocal-purple">TapLocal</span>
           </Link>
           <Button
             variant="ghost"
             size="sm"
-            className="flex"
+            className="flex dark:text-gray-300 dark:hover:bg-gray-800"
             onClick={toggleSidebar}
           >
             <ChevronRight size={18} />
@@ -187,12 +186,12 @@ const Sidebar = ({ userType }: SidebarProps) => {
         </div>
 
         {userType === "client" && (
-          <div className="flex flex-col items-center p-4 border-b border-border">
+          <div className="flex flex-col items-center p-4 border-b border-gray-100 dark:border-gray-800">
             <Avatar className="h-14 w-14 border-2 border-taplocal-purple mb-2">
               <img src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" alt="Profile" />
             </Avatar>
-            <h3 className="font-medium text-foreground">Alex Johnson</h3>
-            <span className="text-xs text-muted-foreground">alex@example.com</span>
+            <h3 className="font-medium text-gray-800 dark:text-white">Alex Johnson</h3>
+            <span className="text-xs text-gray-500 dark:text-gray-400">alex@example.com</span>
           </div>
         )}
         
@@ -205,7 +204,7 @@ const Sidebar = ({ userType }: SidebarProps) => {
                 className={`flex items-center space-x-3 px-3 py-2.5 rounded-lg transition-colors cursor-pointer ${
                   isLinkActive(link.path)
                     ? "bg-taplocal-purple text-white"
-                    : "text-gray-700 hover:bg-taplocal-purple/10 hover:text-taplocal-purple"
+                    : "text-gray-700 dark:text-gray-300 hover:bg-taplocal-purple/10 hover:text-taplocal-purple dark:hover:text-taplocal-purple"
                 }`}
               >
                 <div className={`${isLinkActive(link.path) ? "text-white" : "text-taplocal-purple"}`}>
@@ -217,14 +216,14 @@ const Sidebar = ({ userType }: SidebarProps) => {
           </div>
         </div>
         
-        <div className="p-4 border-t border-border">
+        <div className="p-4 border-t border-gray-100 dark:border-gray-800">
           <div className="mb-4 flex justify-between items-center">
-            <span className="text-xs text-muted-foreground">Theme</span>
+            <span className="text-xs text-gray-500 dark:text-gray-400">Theme</span>
             <ThemeToggle />
           </div>
           <Button 
             variant="ghost" 
-            className="w-full justify-start text-red-500 hover:bg-red-50 hover:text-red-600"
+            className="w-full justify-start text-red-500 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/30"
             onClick={() => navigate("/")}
           >
             <LogOut size={16} className="mr-2" /> Logout
@@ -233,7 +232,7 @@ const Sidebar = ({ userType }: SidebarProps) => {
       </aside>
 
       {userType === "client" && isMobile && (
-        <div className="fixed bottom-0 left-0 w-full bg-white border-t z-20 p-1">
+        <div className="fixed bottom-0 left-0 w-full bg-white dark:bg-gray-900 border-t dark:border-gray-800 z-20 p-1">
           <div className="flex justify-around items-center">
             {clientLinks.map((link) => (
               <Button
@@ -242,11 +241,11 @@ const Sidebar = ({ userType }: SidebarProps) => {
                 className={`flex flex-col items-center py-1 px-2 rounded-lg ${
                   isLinkActive(link.path)
                     ? "bg-taplocal-purple/10 text-taplocal-purple"
-                    : "text-gray-600"
-                }`}
+                    : "text-gray-600 dark:text-gray-400"
+                } dark:hover:bg-gray-800`}
                 onClick={() => navigate(link.path)}
               >
-                <div className={isLinkActive(link.path) ? "text-taplocal-purple" : "text-gray-600"}>
+                <div className={isLinkActive(link.path) ? "text-taplocal-purple" : "text-gray-600 dark:text-gray-400"}>
                   {link.icon}
                 </div>
                 <span className="text-xs mt-1">{link.name}</span>
