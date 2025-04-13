@@ -13,7 +13,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-sm py-4">
+    <nav className="bg-white border-b border-border dark:bg-gray-900 shadow-sm py-4">
       <div className="container-app flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
           <span className="text-2xl font-heading font-bold text-taplocal-purple">TapLocal</span>
@@ -23,21 +23,21 @@ const Navbar = () => {
         <div className="hidden md:flex items-center space-x-6">
           <div className="flex space-x-6">
             <div className="group relative">
-              <Link to="/services" className="text-taplocal-dark dark:text-gray-200 hover:text-taplocal-purple transition-colors pb-2">
+              <Link to="/services" className="text-gray-700 dark:text-gray-200 hover:text-taplocal-purple transition-colors pb-2">
                 Browse Services
               </Link>
               <div className="absolute inset-x-0 bottom-0 h-0.5 bg-taplocal-purple transform scale-x-0 origin-left transition-transform group-hover:scale-x-100"></div>
             </div>
 
             <div className="group relative">
-              <Link to="/how-it-works" className="text-taplocal-dark dark:text-gray-200 hover:text-taplocal-purple transition-colors pb-2">
+              <Link to="/how-it-works" className="text-gray-700 dark:text-gray-200 hover:text-taplocal-purple transition-colors pb-2">
                 How It Works
               </Link>
               <div className="absolute inset-x-0 bottom-0 h-0.5 bg-taplocal-purple transform scale-x-0 origin-left transition-transform group-hover:scale-x-100"></div>
             </div>
 
             <div className="group relative">
-              <Link to="/about" className="text-taplocal-dark dark:text-gray-200 hover:text-taplocal-purple transition-colors pb-2">
+              <Link to="/about" className="text-gray-700 dark:text-gray-200 hover:text-taplocal-purple transition-colors pb-2">
                 About Us
               </Link>
               <div className="absolute inset-x-0 bottom-0 h-0.5 bg-taplocal-purple transform scale-x-0 origin-left transition-transform group-hover:scale-x-100"></div>
@@ -57,7 +57,7 @@ const Navbar = () => {
         <div className="md:hidden flex items-center space-x-2">
           <ThemeToggle />
           <button
-            className="text-taplocal-dark dark:text-gray-200 p-2"
+            className="text-gray-700 dark:text-gray-200 p-2"
             onClick={toggleMenu}
             aria-label="Toggle Menu"
           >
@@ -68,25 +68,25 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 animate-fade-in">
+        <div className="md:hidden bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 animate-fade-in">
           <div className="container-app py-4 flex flex-col space-y-4">
             <Link
               to="/services"
-              className="text-taplocal-dark dark:text-gray-200 hover:text-taplocal-purple py-2 transition-colors"
+              className="text-gray-700 dark:text-gray-200 hover:text-taplocal-purple py-2 transition-colors"
               onClick={toggleMenu}
             >
               Browse Services
             </Link>
             <Link
               to="/how-it-works"
-              className="text-taplocal-dark dark:text-gray-200 hover:text-taplocal-purple py-2 transition-colors"
+              className="text-gray-700 dark:text-gray-200 hover:text-taplocal-purple py-2 transition-colors"
               onClick={toggleMenu}
             >
               How It Works
             </Link>
             <Link
               to="/about"
-              className="text-taplocal-dark dark:text-gray-200 hover:text-taplocal-purple py-2 transition-colors"
+              className="text-gray-700 dark:text-gray-200 hover:text-taplocal-purple py-2 transition-colors"
               onClick={toggleMenu}
             >
               About Us
